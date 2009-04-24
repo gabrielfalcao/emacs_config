@@ -277,3 +277,6 @@
 (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
 (put 'downcase-region 'disabled nil)
+
+(autoload 'javascript-mode "javascript" nil t)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
