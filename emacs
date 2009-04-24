@@ -5,6 +5,7 @@
   ;; If there is more than one, they won't work right.
  '(browse-url-browser-function (quote browse-url-epiphany))
  '(column-number-mode t)
+ '(face-font-family-alternatives (quote (("Monaco" "fixed") ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-echo-area-message "gabriel")
  '(initial-buffer-choice t)
  '(initial-scratch-message "")
@@ -169,64 +170,10 @@
 ;; Free Software Foundation, Inc.,   51 Franklin Street, Fifth Floor,
 ;; Boston, MA  02110-1301  USA
 
-(require 'json)
+(require 'twit)
 
-(defvar twitter-usernamepassword-history t)
-(load "~/.hidden/emacs-twitter")
+(defvar twit-user "gabrielfalcao")
 
-(defun twitter (msg &optional imagename)
-  (interactive
-   (if current-prefix-arg
-       (append (twitter-ask)
-               (list (read-file-name "imagename: " "~/twitter/")))
-     (twitter-ask)))
-
-    ;; Set the image (maybe)
-    (if imagename
-        (let ((resize-mini-windows nil))
-          (shell-command-to-string (concat "curl -L -s "
-                                           (format "-u %s " usernamepassword)
-                                           (format "-F \"user[profile_image]=@%s\" " (expand-file-name imagename))
-                                           "http://twitter.com/account/picture"))))
-    ;; Send the entry
-    (let ((resize-mini-windows nil)
-          (twitter-return-value
-           (shell-command-to-string (concat (format "curl -s -u %s " usernamepassword)
-                                            (format "-d \"status=%s\" " msg)
-                                            "http://twitter.com/statuses/update.json"))))
-      (let ((stats (json-read-from-string twitter-return-value)))
-        (message "%s" stats)
-        (display-message-or-buffer (format "Pronto! Seu post foi criado em: %s" (cdr (assoc 'created_at stats)))))))
-
-(defun twitter-ask ()
-  (list
-   (read-from-minibuffer "O que você está fazendo ? ")))
-;; End
-;; remove trailing whitespaces before saving
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-;; update copyright headers before saving
-(add-hook 'before-save-hook 'copyright-update)
-;; update timestamp ("last modified") before saving
-(setq time-stamp-pattern "10/[Ll]ast modified: %:y-%02m-%02d %02H:%02M by %u$")
-(add-hook 'before-save-hook 'time-stamp)
-
-;; fetch semantic tags after saving
-;(add-hook 'after-save-hook 'semantic-fetch-tags)
-;; make file executable
-(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-
-;; hippie-expand functions
-(setq hippie-expand-try-functions-list
-      '(try-complete-file-name-partially
-              try-complete-file-name
-                      try-expand-all-abbrevs
-                              ;try-expand-list
-                                      ;try-expand-line
-                                              try-expand-dabbrev
-                                                      try-expand-dabbrev-all-buffers
-                                                              try-expand-dabbrev-from-kill
-                                                                      try-complete-lisp-symbol-partially
-                                                                              try-complete-lisp-symbol))
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; don't show so many messages on startup
 ;(setq inhibit-startup-message t)
@@ -277,6 +224,11 @@
 (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
 (put 'downcase-region 'disabled nil)
-
 (autoload 'javascript-mode "javascript" nil t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
+(autoload 'pymacs-load "pymacs" nil t)
+(autoload 'pymacs-eval "pymacs" nil t)
+(autoload 'pymacs-apply "pymacs")
+(autoload 'pymacs-call "pymacs")
+(pymacs-load "bikeemacs" "brm-")
+(brm-init)
