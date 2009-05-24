@@ -216,6 +216,9 @@
 
 ;;try to fix strange stuff in css mode.
 
+;; clear trailing spaces
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 (setq cssm-indent-level 4)
 (setq cssm-newline-before-closing-bracket t)
 (setq cssm-indent-function #'cssm-c-style-indenter)
