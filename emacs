@@ -1,3 +1,7 @@
+;; where to get the latest emacs snapshot gtk
+;; deb http://emacs.orebokech.com sid main
+;; deb-src http://emacs.orebokech.com sid main
+
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -27,11 +31,12 @@
 
 ;; Expanding the load-path
 (setq load-path (cons "~/.emacs.d/elisp/" load-path))
-(set-default-font "Monaco-10")
 ;(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
-;(set-default-font "DejaVu Sans Mono-10")
+(set-default-font "Monaco-11")
+; Python mode
+(load-file "~/.emacs.d/elisp/python.el")
 ;; Server mode always running
 (server-start)
 
@@ -156,7 +161,8 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- )
+ '(flymake-errline ((((class color)) (:background "Red" :foreground "white"))))
+ '(flymake-warnline ((((class color)) (:background "Cyan" :foreground "black")))))
 
 ;; Copyright (C) 2007 by Tapsell-Ferrier Limited
 
