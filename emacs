@@ -135,6 +135,7 @@
 ;; Python stuff !
 ;;(autoload 'py-complete-init "py-complete")
 ;;(add-hook 'python-mode-hook 'py-complete-init)
+;;(add-hook 'python-mode-hook 'flymake-mode)
 
 (setq auto-mode-alist
       (append
@@ -143,17 +144,16 @@
         '("\\.zpt$" . html-mode)
         '("\\.pt$" . html-mode)
         '("\\.acc$" . ruby-mode)
-        '("\\.rhtml$" . html-mode))
-       auto-mode-alist))
+        auto-mode-alist)))
 
 ;; keybindings para o tabbar (Ps.: Essa porra não tá funfando...)
 ;; (tabbar-mode)
 ;; (define-key global-map [C-tab] 'tabbar-forward-tab)
 ;; (define-key global-map [C-S-iso-lefttab] 'tabbar-backward-tab)
-;(global-set-key (kbd "<up>") 'ignore)
-;(global-set-key (kbd "<down>") 'ignore)
-;(global-set-key (kbd "<left>") 'ignore)
-;(global-set-key (kbd "<right>") 'ignore)
+(global-set-key (kbd "<up>") 'ignore)
+(global-set-key (kbd "<down>") 'ignore)
+(global-set-key (kbd "<left>") 'ignore)
+(global-set-key (kbd "<right>") 'ignore)
 (require 'linum)
 (global-linum-mode)
 (custom-set-faces
