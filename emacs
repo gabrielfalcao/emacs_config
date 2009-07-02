@@ -5,7 +5,7 @@
   ;; If there is more than one, they won't work right.
  '(browse-url-browser-function (quote browse-url-epiphany))
  '(column-number-mode t)
- '(face-font-family-alternatives (quote (("Monaco" "fixed") ("helv" "helvetica" "arial" "fixed"))))
+ '(face-font-family-alternatives (quote (("Monaco-10") ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-echo-area-message "gabriel")
  '(initial-buffer-choice t)
  '(initial-scratch-message "")
@@ -42,6 +42,7 @@
 (require 'color-theme)
 
 (load "~/.emacs.d/elisp/color-theme-twilight.el")
+(load "~/.emacs.d/elisp/color-theme-tango.el")
 (load "~/.emacs.d/elisp/color-theme-blackboard.el")
 (load "~/.emacs.d/elisp/color-theme-zenburn.el")
 (load "~/.emacs.d/elisp/color-theme-sunburst.el")
@@ -114,6 +115,9 @@
 
 ;; Yes, I'm a web developer =/
 (add-hook 'javascript-mode-hook 'js-mode)
+(add-hook 'before-make-frame-hook '(lambda()
+    (set-default-font "Monaco-10")
+))
 (autoload 'js-mode "js-mode" nil t)
 (autoload 'css-mode "css-mode")
 
@@ -133,6 +137,7 @@
         '("\\.sgm$" . sgml-mode)
         '("\\.zpt$" . html-mode)
         '("\\.pt$" . html-mode)
+        '("\\.acc$" . ruby-mode)
         '("\\.rhtml$" . html-mode))
        auto-mode-alist))
 
