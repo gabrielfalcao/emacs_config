@@ -29,6 +29,10 @@
   ;; If there is more than one, they won't work right.
 ;;'(default ((t (:stipple nil :background "black" :foreground "#c0c0c0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :family "misc-fixed")))))
 
+(setq-default c-basic-offset 4)
+(setq-default html-basic-offset 4)
+(setq tab-width 4) ; or any other preferred value
+
 ;; Expanding the load-path
 (setq load-path (cons "~/.emacs.d/elisp/" load-path))
 ;(set-default-font "Monospace-9")
@@ -36,9 +40,7 @@
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
 (set-default-font "Monaco-11")
 ; Python mode
-(load-file "~/.emacs.d/elisp/python.el")
-;; Server mode always running
-(server-start)
+;(load-file "~/.emacs.d/elisp/python.el")
 
 ;; making new emacs windows have a pretty font
 ;;(add-to-list 'default-frame-alist '(font . "Bitstream Vera SansMono-8"))
@@ -230,6 +232,7 @@
 ;; clear trailing spaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+(setq html-indent-level 4)
 (setq cssm-indent-level 4)
 (setq cssm-newline-before-closing-bracket t)
 (setq cssm-indent-function #'cssm-c-style-indenter)
@@ -246,3 +249,4 @@
 (autoload 'pymacs-call "pymacs")
 (pymacs-load "bikeemacs" "brm-")
 (brm-init)
+
