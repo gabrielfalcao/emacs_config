@@ -144,6 +144,7 @@
        (list
         '("\\.sgm$" . sgml-mode)
         '("\\.zpt$" . html-mode)
+        '("\\.html$" . html-mode)
         '("\\.pt$" . html-mode)
         '("\\.acc$" . ruby-mode)
         auto-mode-alist)))
