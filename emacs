@@ -38,10 +38,11 @@
 ;(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
-(set-default-font "Monaco-11")
+(set-default-font "Monaco-9")
 ; Python mode
 ;(load-file "~/.emacs.d/elisp/python.el")
 
+(load-file "~/.emacs.d/elisp/two-mode-mode.el")
 ;; making new emacs windows have a pretty font
 ;;(add-to-list 'default-frame-alist '(font . "Bitstream Vera SansMono-8"))
 
@@ -250,3 +251,4 @@
 (pymacs-load "bikeemacs" "brm-")
 (brm-init)
 
+(set-default-font "Monaco-9")
