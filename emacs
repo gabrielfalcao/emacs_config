@@ -56,8 +56,9 @@
 (load "~/.emacs.d/elisp/color-theme-sunburst.el")
 
 (setq color-theme-is-global t)
-;(color-theme-sunburst)
+
 (color-theme-blackboard)
+(color-theme-sunburst)
 ;;(color-theme-blippblopp) ;; best light theme ! (default)
 ;;(color-theme-ld-dark) ;; pretty cool dark theme
 ;;(color-theme-hober) ;; good dark theme
@@ -144,9 +145,26 @@
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
 ;; Python stuff !
+
+(when (load "flymake" t)
+  (defun flymake-pyflakes-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (list "pyflakes" (list local-file))))
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.py\\'" flymake-pyflakes-init)))
+(add-hook 'python-mode-hook 'flymake-mode)
+
 (autoload 'py-complete-init "py-complete")
 (add-hook 'python-mode-hook 'py-complete-init)
 (add-hook 'python-mode-hook 'flymake-mode)
+
+;; better flymake colors
+(custom-set-faces
+ '(flymake-errline ((((class color)) (:background "#ff5959" :foreground "#faff60")))))
 
 (setq auto-mode-alist
       (append
@@ -171,13 +189,6 @@
 (global-set-key (kbd "<right>") 'ignore)
 (require 'linum)
 (global-linum-mode)
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(flymake-errline ((((class color)) (:background "Red" :foreground "white"))))
- '(flymake-warnline ((((class color)) (:background "Cyan" :foreground "black")))))
 
 ;; Copyright (C) 2007 by Tapsell-Ferrier Limited
 

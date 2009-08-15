@@ -28,7 +28,7 @@
 ;;; Commentary:
 
 ;; Basic steps to setup:
-;; 
+;;
 ;;   1. In your .emacs file:
 ;;	  (add-to-list 'load-path "/dir/to/yasnippet.el")
 ;;        (require 'yasnippet)
@@ -99,7 +99,7 @@
 ;;				       yas/completing-prompt))
 ;;
 ;;   Also check out the customization group
-;;   
+;;
 ;;        M-x customize-group RET yasnippet RET
 ;;
 ;;   For more information and detailed usage, refer to the project page:
@@ -273,8 +273,8 @@ An error string \"[yas] error\" is returned instead."
   :group 'yasnippet)
 
 (defface yas/field-highlight-face
-  '((((class color) (background light)) (:background "DarkSeaGreen1"))
-    (t (:background "DimGrey")))
+  '((((class color) (background light)) (:background "DimGrey"))
+    (t (:background "#faff60")))
   "The face used to highlight the currently active field of a snippet"
   :group 'yasnippet)
 
@@ -388,7 +388,7 @@ Here's an example:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Internal variables
-;; 
+;;
 
 (defvar yas/version "0.6.0b")
 
@@ -437,7 +437,7 @@ Here's an example:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Minor mode stuff
 ;;
-;; TODO: XXX: This is somehow needed in Carbon Emacs for MacOSX 
+;; TODO: XXX: This is somehow needed in Carbon Emacs for MacOSX
 (defvar last-buffer-undo-list nil)
 
 (defvar yas/minor-mode-map (make-sparse-keymap)
@@ -533,7 +533,7 @@ Key bindings:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Internal structs for template management
-;; 
+;;
 
 (defstruct (yas/template (:constructor yas/make-template
                                        (content name condition env file)))
@@ -626,7 +626,7 @@ fetch from parent if any."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Internal functions
-;; 
+;;
 
 (defun yas/ensure-minor-mode-priority ()
   "Ensure that the key binding of yas/minor-mode takes priority."
@@ -822,7 +822,7 @@ Here's a list of currently recognized variables:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Popping up for keys and templates
-;; 
+;;
 (defun yas/prompt-for-template (templates &optional prompt)
   "Interactively choose a template from the list TEMPLATES.
 
@@ -909,9 +909,9 @@ TEMPLATES is a list of `yas/template'."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Loading snippets from files
-;; 
+;;
 (defun yas/load-directory-1 (directory &optional parent)
-  
+
   "Recursively load snippet templates from DIRECTORY."
 
   (let ((mode-sym (intern (file-name-nondirectory directory)))
@@ -1099,7 +1099,7 @@ Here's the default value for all the parameters:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; User level functions
-;;; 
+;;;
 
 (defun yas/about ()
   (interactive)
@@ -1163,7 +1163,7 @@ directory to find snippet files.
 	    ;; in some other group. An entry is considered as existing
 	    ;; in another group if its name string-matches.
 	    (yas/delete-from-keymap group-keymap name)
-  
+
 	    ;; ... then add this entry to the correct group
             (when (and (not (null group))
                        (not (string= "" group)))
@@ -1189,7 +1189,7 @@ Skip any submenus named \"parent mode\""
   ;; First of all, r ecursively enter submenus, i.e. the tree is
   ;; searched depth first so that stale submenus can be found in the
   ;; higher passes.
-  ;; 
+  ;;
   (mapc #'(lambda (item)
 	    (when (and (keymapp (fourth item))
 		       (stringp (third item))
@@ -1454,7 +1454,7 @@ With optional prefix argument KILL quit the window and buffer."
 	     (when debug
 	       (add-hook 'post-command-hook 'yas/debug-some-vars 't 'local))))
 	  (t
-	   (message "[yas] Cannot test snippet for unknown major mode"))))) 
+	   (message "[yas] Cannot test snippet for unknown major mode")))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; User convenience functions, for using in snippet definitions
@@ -1662,7 +1662,7 @@ delegate to `yas/next-field'."
 	 (target-pos (and active-field-pos (+ arg active-field-pos)))
 	 (target-field (nth target-pos live-fields)))
     ;; First check if we're moving out of a field with a transform
-    ;; 
+    ;;
     (when (and active-field
 	       (yas/field-transform active-field))
       (let* ((yas/moving-away-p t)
@@ -1808,7 +1808,7 @@ NO-HOOKS means don't run the `yas/after-exit-snippet-hook' hooks."
       ;; Dismember the snippet... this is useful if we get called
       ;; again from `yas/take-care-of-redo'....
       (setf (yas/snippet-fields snippet) nil))
-    
+
     ;; XXX: `yas/after-exit-snippet-hook' should be run with
     ;; `yas/snippet-beg' and `yas/snippet-end' bound. That might not
     ;; be the case if the main overlay had somehow already
@@ -1816,7 +1816,7 @@ NO-HOOKS means don't run the `yas/after-exit-snippet-hook' hooks."
     ;; up...
     ;;
     (unless no-hooks (run-hooks 'yas/after-exit-snippet-hook)))
-  
+
   (message "[yas] snippet exited."))
 
 (defun yas/check-commit-snippet ()
@@ -1990,14 +1990,14 @@ Move the overlays, or create them if they do not exit."
     ;; otherwise we'll have to do a bit of cheating and silently
     ;; insert a newline. the `(1+ (buffer-size))' should prevent this
     ;; when using stacked expansion
-    ;; 
+    ;;
     (when (< (buffer-size) end)
       (save-excursion
 	(let ((inhibit-modification-hooks t))
 	  (goto-char (point-max))
 	  (newline))))
     ;; go on to normal overlay creation/moving
-    ;; 
+    ;;
     (cond ((and yas/field-protection-overlays
 		(every #'overlay-buffer yas/field-protection-overlays))
 	   (move-overlay (first yas/field-protection-overlays) (1- start) start)
@@ -2059,7 +2059,7 @@ will be deleted before inserting template."
   (goto-char start)
 
   ;; stacked expansion: shoosh the overlay modification hooks
-  ;; 
+  ;;
   (let ((key (buffer-substring-no-properties start end))
 	(inhibit-modification-hooks t)
 	(column (current-column))
@@ -2068,7 +2068,7 @@ will be deleted before inserting template."
     ;; Delete the trigger key, this *does* get undo-recorded.
     ;;
     (delete-region start end)
-    
+
     ;; Narrow the region down to the template, shoosh the
     ;; `buffer-undo-list', and create the snippet, the new snippet
     ;; updates its mirrors once, so we are left with some plain text.
@@ -2104,16 +2104,16 @@ will be deleted before inserting template."
       (when existing-field
 	(setf (yas/snippet-previous-active-field snippet) existing-field)
 	(yas/advance-field-end-marker existing-field (overlay-end yas/active-field-overlay))))
-    
+
     ;; Exit the snippet immediately if no fields
     ;;
     (unless (yas/snippet-fields snippet)
       (yas/exit-snippet snippet))
-    
+
     ;; Push two undo actions: the deletion of the inserted contents of
     ;; the new snippet (whitout the "key") followed by an apply of
     ;; `yas/take-care-of-redo' on the newly inserted snippet boundaries
-    ;; 
+    ;;
     (let ((start (overlay-start (yas/snippet-control-overlay snippet)))
 	  (end (overlay-end (yas/snippet-control-overlay snippet))))
       (push (cons start end) buffer-undo-list)
@@ -2157,12 +2157,12 @@ After revival, push the `yas/take-care-of-redo' in the
     (when target-field
       (setf (yas/snippet-control-overlay snippet) (yas/make-control-overlay snippet beg end))
       (overlay-put (yas/snippet-control-overlay snippet) 'yas/snippet snippet)
-   
+
       (yas/move-to-field snippet target-field)
 
       (add-hook 'post-command-hook 'yas/post-command-handler nil t)
       (add-hook 'pre-command-hook 'yas/pre-command-handler t t)
-  
+
       (push `(apply yas/take-care-of-redo ,beg ,end ,snippet)
 	    buffer-undo-list))))
 
@@ -2179,7 +2179,7 @@ Returns the newly created snippet."
 
     ;; Calculate field and mirror adjacencies
     (yas/calculate-adjacencies snippet)
-    
+
     ;; Update the mirrors for the first time
     (yas/update-mirrors snippet)
 
@@ -2192,7 +2192,7 @@ Returns the newly created snippet."
     ;; Setup hooks
     (add-hook 'post-command-hook 'yas/post-command-handler nil t)
     (add-hook 'pre-command-hook 'yas/pre-command-handler t t)
-    
+
     snippet))
 
 (defun yas/snippet-sort-link-fields (snippet)
@@ -2203,10 +2203,10 @@ Returns the newly created snippet."
 
 (defun yas/calculate-adjacencies (snippet)
   ;; For each field in the snippet
-  ;; 
+  ;;
   (dolist (field (yas/snippet-fields snippet))
     ;; Calculate its adjacencies to other mirrors and fields
-    ;; 
+    ;;
     (dolist (otherfield (yas/snippet-fields snippet))
       (dolist (mirror (yas/field-mirrors otherfield))
 	(when (= (yas/field-end field) (yas/mirror-start mirror))
@@ -2227,7 +2227,7 @@ necessary fields, mirrors and exit points.
 Meant to be called in a narrowed buffer, does various passes"
   (let ((parse-start (point)))
     ;; protect quote and backquote escapes
-    ;; 
+    ;;
     (yas/protect-escapes nil '(?` ?'))
     ;; replace all backquoted expressions
     ;;
@@ -2239,11 +2239,11 @@ Meant to be called in a narrowed buffer, does various passes"
     (goto-char parse-start)
     (yas/protect-escapes)
     ;; parse fields with {}
-    ;; 
+    ;;
     (goto-char parse-start)
     (yas/field-parse-create snippet)
     ;; parse simple mirrors and fields
-    ;; 
+    ;;
     (goto-char parse-start)
     (yas/simple-mirror-parse-create snippet)
     ;; parse mirror transforms
@@ -2357,7 +2357,7 @@ With optional string TEXT do it in string instead of buffer."
 				     (when text-provided-p changed-text))))
 	  (or escaped yas/escaped-characters))
     changed-text))
-  
+
 (defun yas/restore-escapes (&optional text escaped)
   "Restore all escaped characters from their numeric ASCII value.
 
@@ -2457,7 +2457,7 @@ When multiple expressions are found, only the last one counts."
   (while (re-search-forward yas/simple-mirror-regexp nil t)
   (let ((number (string-to-number (match-string-no-properties 1))))
     (cond ((zerop number)
-	     
+
 	   (setf (yas/snippet-exit snippet)
 		 (yas/make-marker (match-end 0)))
 	   (save-excursion
@@ -2487,12 +2487,12 @@ When multiple expressions are found, only the last one counts."
       ;; stacked expansion: I added an `inhibit-modification-hooks'
       ;; here, for safety, may need to remove if we the mechanism is
       ;; altered.
-      ;; 
+      ;;
       (let ((inhibit-modification-hooks t))
 	(yas/mirror-update-display mirror field)
 	;; Take care of the fields adjacent to this mirror's back
 	;; TODO: Known bug
-	
+
 	;; `yas/place-overlays' is needed if the active field and
 	;; protected overlays have been changed because of insertions
 	;; in `yas/mirror-update-display'
@@ -2530,7 +2530,7 @@ When multiple expressions are found, only the last one counts."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Pre- and post-command hooks
-;; 
+;;
 (defun yas/pre-command-handler () )
 
 (defun yas/post-command-handler ()
@@ -2571,7 +2571,7 @@ When multiple expressions are found, only the last one counts."
 
   (princ (format "%s live snippets in total\n" (length (yas/snippets-at-point (quote all-snippets)))))
   (princ (format "%s live snippets at point:\n\n" (length (yas/snippets-at-point))))
-    
+
   (dolist (snippet (yas/snippets-at-point))
     (princ (format "\tsid: %s active field %d from %s to %s covering \"%s\"\n"
 		   (yas/snippet-id snippet)
@@ -2593,7 +2593,7 @@ When multiple expressions are found, only the last one counts."
 		       (marker-position (yas/mirror-end mirror))
 		       (buffer-substring-no-properties (yas/mirror-start mirror) (yas/mirror-end mirror)))))))
 
-  
+
 
   (princ (format "\nUndo is %s and point-max is %s.\n"
 		 (if (eq buffer-undo-list t)
