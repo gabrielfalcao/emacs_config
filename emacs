@@ -56,7 +56,8 @@
 (load "~/.emacs.d/elisp/color-theme-sunburst.el")
 
 (setq color-theme-is-global t)
-(color-theme-sunburst)
+;(color-theme-sunburst)
+(color-theme-blackboard)
 ;;(color-theme-blippblopp) ;; best light theme ! (default)
 ;;(color-theme-ld-dark) ;; pretty cool dark theme
 ;;(color-theme-hober) ;; good dark theme
