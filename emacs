@@ -64,6 +64,13 @@
 (setq color-theme-is-global nil)
 (setq-default indent-tabs-mode nil)
 
+;; textmate-like snippets
+;; http://code.google.com/p/yasnippet/
+(add-to-list 'load-path "~/.emacs.d/elisp/yasnippet")
+(require 'yasnippet) ;; not yasnippet-bundle
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/elisp/snippets")
+
 ;; Exploring more goodies =)
 (tool-bar-mode)
 (bar-cursor-mode)
@@ -127,7 +134,7 @@
     (set-default-font "Monaco-10")
 ))
 (autoload 'js-mode "js-mode" nil t)
-(autoload 'css-mode "css-mode")
+(autoload 'css-mode "css-mode" "Mode for editing CSS files" t)
 
 (setq auto-mode-alist
      (cons '("\\.js\\'" . javscript-mode) auto-mode-alist))
@@ -136,9 +143,9 @@
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
 ;; Python stuff !
-;;(autoload 'py-complete-init "py-complete")
-;;(add-hook 'python-mode-hook 'py-complete-init)
-;;(add-hook 'python-mode-hook 'flymake-mode)
+(autoload 'py-complete-init "py-complete")
+(add-hook 'python-mode-hook 'py-complete-init)
+(add-hook 'python-mode-hook 'flymake-mode)
 
 (setq auto-mode-alist
       (append
@@ -146,8 +153,11 @@
         '("\\.sgm$" . sgml-mode)
         '("\\.zpt$" . html-mode)
         '("\\.html$" . html-mode)
+        '(".emacs" . lisp-mode)
+        '("emacs" . lisp-mode)
         '("\\.pt$" . html-mode)
         '("\\.acc$" . ruby-mode)
+        '("\\.css$" . css-mode)
         auto-mode-alist)))
 
 ;; keybindings para o tabbar (Ps.: Essa porra não tá funfando...)
