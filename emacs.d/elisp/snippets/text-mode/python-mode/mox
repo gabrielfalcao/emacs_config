@@ -1,0 +1,5 @@
+# -*- coding: utf-8 -*-
+# name: mox
+# contributor: Gabriel Falcão <gabriel@nacaolivre.org>
+# --
+from mox import Mox

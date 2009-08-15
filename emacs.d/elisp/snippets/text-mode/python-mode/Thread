@@ -1,0 +1,7 @@
+# -*- coding: utf-8 -*-
+# name: Thread
+# contributor: Gabriel Falcão <gabriel@nacaolivre.org>
+# --
+class ${1:ThreadedClassName}(Thread):
+    def run(self):
+        ${2:do something ...}
