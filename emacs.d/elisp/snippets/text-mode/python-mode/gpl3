@@ -2,8 +2,9 @@
 # name: gpl3
 # contributor: Gabriel Falcão <gabriel@nacaolivre.org>
 # --
+# -*- coding: utf-8 -*-
 # <${1:Program Name} - ${2:Program Description}>
-# Copyright (C) <${3:2009}>  <${4:Gabriel Falcão <gabriel@nacaolivre.org}>
+# Copyright (C) <${3:2009}>  ${4:Gabriel Falcão <gabriel@nacaolivre.org>}
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
