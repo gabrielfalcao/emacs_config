@@ -145,6 +145,7 @@
        (list
         '("\\.sgm$" . sgml-mode)
         '("\\.zpt$" . html-mode)
+        '("\\.html$" . html-mode)
         '("\\.pt$" . html-mode)
         '("\\.acc$" . ruby-mode)
         auto-mode-alist)))
@@ -232,6 +233,10 @@
 
 ;; clear trailing spaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'html-mode-hook
+          (lambda()
+            (setq sgml-basic-offset 4)
+            (setq indent-tabs-mode t)))
 
 (setq html-indent-level 4)
 (setq cssm-indent-level 4)
