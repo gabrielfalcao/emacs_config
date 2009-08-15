@@ -159,12 +159,12 @@
 (add-hook 'python-mode-hook 'flymake-mode)
 
 (autoload 'py-complete-init "py-complete")
-(add-hook 'python-mode-hook 'py-complete-init)
+;(add-hook 'python-mode-hook 'py-complete-init) pisses me off
 (add-hook 'python-mode-hook 'flymake-mode)
 
 ;; better flymake colors
 (custom-set-faces
- '(flymake-errline ((((class color)) (:background "#ff5959" :foreground "#faff60")))))
+ '(flymake-errline ((((class color)) (:background "#faff60" :foreground "#101010")))))
 
 (setq auto-mode-alist
       (append

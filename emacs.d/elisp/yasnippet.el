@@ -273,7 +273,7 @@ An error string \"[yas] error\" is returned instead."
   :group 'yasnippet)
 
 (defface yas/field-highlight-face
-  '((((class color) (background light)) (:background "DimGrey"))
+  '((((class color) (background light)) (:background "#101010"))
     (t (:background "#faff60")))
   "The face used to highlight the currently active field of a snippet"
   :group 'yasnippet)
