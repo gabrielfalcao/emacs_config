@@ -176,6 +176,8 @@
         '("emacs" . lisp-mode)
         '("\\.pt$" . html-mode)
         '("\\.acc$" . ruby-mode)
+        '("\\.yml$" . yaml-mode)
+        '("\\.yaml$" . yaml-mode)
         '("\\.css$" . css-mode)
         auto-mode-alist)))
 
