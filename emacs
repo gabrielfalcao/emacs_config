@@ -174,6 +174,7 @@
         '("\\.html$" . html-mode)
         '(".emacs" . lisp-mode)
         '("emacs" . lisp-mode)
+        '("Makefile.*" . makefile-mode)
         '("\\.pt$" . html-mode)
         '("\\.acc$" . ruby-mode)
         '("\\.yml$" . yaml-mode)
