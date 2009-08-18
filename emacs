@@ -164,7 +164,15 @@
 
 ;; better flymake colors
 (custom-set-faces
- '(flymake-errline ((((class color)) (:background "#faff60" :foreground "#101010")))))
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(flymake-errline ((((class color)) (:background "#ff3131" :foreground "#101010"))))
+ '(rst-level-1-face ((t (:background "white" :foreground "black"))) t)
+ '(rst-level-2-face ((t (:background "white" :foreground "black"))) t)
+ '(rst-level-3-face ((t (:background "white" :foreground "black"))) t)
+ '(rst-level-4-face ((t (:background "grey64"))) t))
 
 (setq auto-mode-alist
       (append
@@ -186,10 +194,10 @@
 ;; (tabbar-mode)
 ;; (define-key global-map [C-tab] 'tabbar-forward-tab)
 ;; (define-key global-map [C-S-iso-lefttab] 'tabbar-backward-tab)
-(global-set-key (kbd "<up>") 'ignore)
-(global-set-key (kbd "<down>") 'ignore)
-(global-set-key (kbd "<left>") 'ignore)
-(global-set-key (kbd "<right>") 'ignore)
+;; (global-set-key (kbd "<up>") 'ignore)
+;; (global-set-key (kbd "<down>") 'ignore)
+;; (global-set-key (kbd "<left>") 'ignore)
+;; (global-set-key (kbd "<right>") 'ignore)
 (require 'linum)
 (global-linum-mode)
 
