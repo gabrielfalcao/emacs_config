@@ -188,6 +188,7 @@
         '("\\.acc$" . ruby-mode)
         '("\\.yml$" . yaml-mode)
         '("\\.yaml$" . yaml-mode)
+        '("\\.rst$" . rst-mode)
         '("\\.css$" . css-mode)
         auto-mode-alist)))
 
