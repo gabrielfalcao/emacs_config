@@ -156,7 +156,6 @@
 
 (add-hook 'python-mode-hook 'flymake-mode)
 (autoload 'py-complete-init "py-complete")
-(add-hook 'python-mode-hook 'py-complete-init) ;;pisses me off
 (add-hook 'python-mode-hook 'flymake-mode)
 
 ;; better flymake colors
