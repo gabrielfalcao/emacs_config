@@ -2,6 +2,16 @@
 #name : <table ...>...</table>
 #group : table
 # --
-<table width="$1" cellspacing="$2" cellpadding="$3" border="$4">
+<table summary="$1">
+  <caption>$1</caption>
+  <thead>
+    $2
+  </thead>
+  <tfoot>
+    $3
+  </tfoot>
+  <tbody>
+    $4
+  </tbody>
   $0
 </table>

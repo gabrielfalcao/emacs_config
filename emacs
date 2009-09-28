@@ -9,7 +9,7 @@
   ;; If there is more than one, they won't work right.
  '(browse-url-browser-function (quote browse-url-epiphany))
  '(column-number-mode t)
- '(face-font-family-alternatives (quote (("Monaco-10") ("helv" "helvetica" "arial" "fixed"))))
+ '(face-font-family-alternatives (quote (("Monaco-9") ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-echo-area-message "gabriel")
  '(initial-buffer-choice t)
  '(initial-scratch-message "")
@@ -35,7 +35,7 @@
 
 ;; Expanding the load-path
 (setq load-path (cons "~/.emacs.d/elisp/" load-path))
-;(set-default-font "Monospace-9")
+(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
 (set-default-font "Monaco-9")
@@ -156,10 +156,9 @@
       (list "pyflakes" (list local-file))))
   (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pyflakes-init)))
-(add-hook 'python-mode-hook 'flymake-mode)
 
 (autoload 'py-complete-init "py-complete")
-;(add-hook 'python-mode-hook 'py-complete-init) pisses me off
+(add-hook 'python-mode-hook 'py-complete-init) ;;pisses me off
 (add-hook 'python-mode-hook 'flymake-mode)
 
 ;; better flymake colors
@@ -289,7 +288,7 @@
 (autoload 'pymacs-eval "pymacs" nil t)
 (autoload 'pymacs-apply "pymacs")
 (autoload 'pymacs-call "pymacs")
-(pymacs-load "bikeemacs" "brm-")
-(brm-init)
+;; (pymacs-load "bikeemacs" "brm-")
+;; (brm-init)
 
-(set-default-font "Monaco-9")
+
