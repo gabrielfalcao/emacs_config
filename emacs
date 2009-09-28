@@ -35,16 +35,13 @@
 
 ;; Expanding the load-path
 (setq load-path (cons "~/.emacs.d/elisp/" load-path))
-(set-default-font "Monospace-9")
-;(set-fontset-font (frame-parameter nil 'font)
-;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
+
+(add-to-list 'default-frame-alist '(font . "Monaco-9"))
 (set-default-font "Monaco-9")
 ; Python mode
-;(load-file "~/.emacs.d/elisp/python.el")
+(load-file "~/.emacs.d/elisp/python.el")
 
 (load-file "~/.emacs.d/elisp/two-mode-mode.el")
-;; making new emacs windows have a pretty font
-;;(add-to-list 'default-frame-alist '(font . "Bitstream Vera SansMono-8"))
 
 ;; color theme
 (require 'color-theme)
@@ -57,7 +54,7 @@
 
 (setq color-theme-is-global t)
 
-(color-theme-blackboard)
+;(color-theme-blackboard)
 (color-theme-sunburst)
 ;;(color-theme-blippblopp) ;; best light theme ! (default)
 ;;(color-theme-ld-dark) ;; pretty cool dark theme
@@ -157,6 +154,7 @@
   (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pyflakes-init)))
 
+(add-hook 'python-mode-hook 'flymake-mode)
 (autoload 'py-complete-init "py-complete")
 (add-hook 'python-mode-hook 'py-complete-init) ;;pisses me off
 (add-hook 'python-mode-hook 'flymake-mode)
@@ -178,6 +176,7 @@
        (list
         '("\\.sgm$" . sgml-mode)
         '("\\.zpt$" . html-mode)
+        '("\\.py$" . python-mode)
         '("\\.html$" . html-mode)
         '(".emacs" . lisp-mode)
         '("emacs" . lisp-mode)
@@ -189,17 +188,14 @@
         '("\\.yml$" . yaml-mode)
         '("\\.yaml$" . yaml-mode)
         '("\\.rst$" . rst-mode)
+        '("fabfile.py$" . python-mode)
         '("\\.css$" . css-mode)
         auto-mode-alist)))
 
-;; keybindings para o tabbar (Ps.: Essa porra não tá funfando...)
-;; (tabbar-mode)
-;; (define-key global-map [C-tab] 'tabbar-forward-tab)
-;; (define-key global-map [C-S-iso-lefttab] 'tabbar-backward-tab)
-;; (global-set-key (kbd "<up>") 'ignore)
-;; (global-set-key (kbd "<down>") 'ignore)
-;; (global-set-key (kbd "<left>") 'ignore)
-;; (global-set-key (kbd "<right>") 'ignore)
+(global-set-key (kbd "<up>") 'ignore)
+(global-set-key (kbd "<down>") 'ignore)
+(global-set-key (kbd "<left>") 'ignore)
+(global-set-key (kbd "<right>") 'ignore)
 (require 'linum)
 (global-linum-mode)
 
