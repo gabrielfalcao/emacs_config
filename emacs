@@ -9,7 +9,7 @@
   ;; If there is more than one, they won't work right.
  '(browse-url-browser-function (quote browse-url-epiphany))
  '(column-number-mode t)
- '(face-font-family-alternatives (quote (("Monaco-9") ("helv" "helvetica" "arial" "fixed"))))
+ '(face-font-family-alternatives (quote (("Monaco-10") ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-echo-area-message "gabriel")
  '(initial-buffer-choice t)
  '(initial-scratch-message "")
@@ -35,13 +35,16 @@
 
 ;; Expanding the load-path
 (setq load-path (cons "~/.emacs.d/elisp/" load-path))
-
-(add-to-list 'default-frame-alist '(font . "Monaco-9"))
+;(set-default-font "Monospace-9")
+;(set-fontset-font (frame-parameter nil 'font)
+;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
 (set-default-font "Monaco-9")
 ; Python mode
-(load-file "~/.emacs.d/elisp/python.el")
+;(load-file "~/.emacs.d/elisp/python.el")
 
 (load-file "~/.emacs.d/elisp/two-mode-mode.el")
+;; making new emacs windows have a pretty font
+;;(add-to-list 'default-frame-alist '(font . "Bitstream Vera SansMono-8"))
 
 ;; color theme
 (require 'color-theme)
@@ -54,7 +57,7 @@
 
 (setq color-theme-is-global t)
 
-;(color-theme-blackboard)
+(color-theme-blackboard)
 (color-theme-sunburst)
 ;;(color-theme-blippblopp) ;; best light theme ! (default)
 ;;(color-theme-ld-dark) ;; pretty cool dark theme
@@ -154,8 +157,8 @@
   (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pyflakes-init)))
 
-(add-hook 'python-mode-hook 'flymake-mode)
 (autoload 'py-complete-init "py-complete")
+;(add-hook 'python-mode-hook 'py-complete-init) pisses me off
 (add-hook 'python-mode-hook 'flymake-mode)
 
 ;; better flymake colors
@@ -175,7 +178,6 @@
        (list
         '("\\.sgm$" . sgml-mode)
         '("\\.zpt$" . html-mode)
-        '("\\.py$" . python-mode)
         '("\\.html$" . html-mode)
         '(".emacs" . lisp-mode)
         '("emacs" . lisp-mode)
@@ -183,11 +185,11 @@
         '("\\.pt$" . html-mode)
         '("\\.rb$" . ruby-mode)
         '("\\.tex$" . tex-mode)
+        '("\\.php$" . php-mode)
         '("\\.acc$" . ruby-mode)
         '("\\.yml$" . yaml-mode)
         '("\\.yaml$" . yaml-mode)
         '("\\.rst$" . rst-mode)
-        '("fabfile.py$" . python-mode)
         '("\\.css$" . css-mode)
         auto-mode-alist)))
 
@@ -279,11 +281,10 @@
 (put 'downcase-region 'disabled nil)
 (autoload 'javascript-mode "javascript" nil t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
-(autoload 'pymacs-load "pymacs" nil t)
-(autoload 'pymacs-eval "pymacs" nil t)
-(autoload 'pymacs-apply "pymacs")
-(autoload 'pymacs-call "pymacs")
-;; (pymacs-load "bikeemacs" "brm-")
-;; (brm-init)
+;; (autoload 'pymacs-load "pymacs" nil t)
+;; (autoload 'pymacs-eval "pymacs" nil t)
+;; (autoload 'pymacs-apply "pymacs")
+;; (autoload 'pymacs-call "pymacs")
 
 
+(set-default-font "Monaco-9")
