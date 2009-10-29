@@ -183,6 +183,7 @@
         '("emacs" . lisp-mode)
         '("Makefile.*" . makefile-mode)
         '("\\.pt$" . html-mode)
+        '("\\.py$" . python-mode)
         '("\\.rb$" . ruby-mode)
         '("\\.tex$" . tex-mode)
         '("\\.php$" . php-mode)
