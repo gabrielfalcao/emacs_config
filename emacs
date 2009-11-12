@@ -289,3 +289,4 @@
 
 
 (set-default-font "Monaco-9")
+(server-start)
