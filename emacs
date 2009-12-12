@@ -186,6 +186,7 @@
         '("\\.py$" . python-mode)
         '("\\.rb$" . ruby-mode)
         '("\\.tex$" . tex-mode)
+        '("\\.erl$" . erlang-mode)
         '("\\.php$" . php-mode)
         '("\\.acc$" . ruby-mode)
         '("\\.yml$" . yaml-mode)
