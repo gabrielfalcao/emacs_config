@@ -9,7 +9,7 @@
   ;; If there is more than one, they won't work right.
  '(browse-url-browser-function (quote browse-url-epiphany))
  '(column-number-mode t)
- '(face-font-family-alternatives (quote (("Monaco-10") ("helv" "helvetica" "arial" "fixed"))))
+ '(face-font-family-alternatives (quote (("Monaco-14") ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-echo-area-message "gabriel")
  '(initial-buffer-choice t)
  '(initial-scratch-message "")
@@ -38,11 +38,12 @@
 ;(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
-(set-default-font "Monaco-9")
 ; Python mode
 ;(load-file "~/.emacs.d/elisp/python.el")
 
 (load-file "~/.emacs.d/elisp/two-mode-mode.el")
+(load-file "~/.emacs.d/elisp/bar-cursor.el")
+(load-file "~/.emacs.d/elisp/maxframe.el")
 ;; making new emacs windows have a pretty font
 ;;(add-to-list 'default-frame-alist '(font . "Bitstream Vera SansMono-8"))
 
@@ -54,11 +55,11 @@
 (load "~/.emacs.d/elisp/color-theme-blackboard.el")
 (load "~/.emacs.d/elisp/color-theme-zenburn.el")
 (load "~/.emacs.d/elisp/color-theme-sunburst.el")
+(load "~/.emacs.d/elisp/color-theme-arjen.el")
 
 (setq color-theme-is-global t)
 
-(color-theme-blackboard)
-(color-theme-sunburst)
+(color-theme-arjen)
 ;;(color-theme-blippblopp) ;; best light theme ! (default)
 ;;(color-theme-ld-dark) ;; pretty cool dark theme
 ;;(color-theme-hober) ;; good dark theme
@@ -74,7 +75,7 @@
 (yas/load-directory "~/.emacs.d/elisp/snippets")
 
 ;; Exploring more goodies =)
-(tool-bar-mode)
+;;(tool-bar-mode)
 (bar-cursor-mode)
 
 ;;(global-linum-mode)
@@ -133,7 +134,7 @@
 ;; Yes, I'm a web developer =/
 (add-hook 'javascript-mode-hook 'js-mode)
 (add-hook 'before-make-frame-hook '(lambda()
-    (set-default-font "Monaco-10")
+    (set-default-font "Monaco-14")
 ))
 (autoload 'js-mode "js-mode" nil t)
 (autoload 'css-mode "css-mode" "Mode for editing CSS files" t)
@@ -289,5 +290,17 @@
 ;; (autoload 'pymacs-call "pymacs")
 
 
-(set-default-font "Monaco-9")
+(set-default-font "Monaco-14")
+
+(defvar my-fullscreen-p t "Check if fullscreen is on or off")
+
+(defun my-toggle-fullscreen ()
+  (interactive)
+  (setq my-fullscreen-p (not my-fullscreen-p))
+  (if my-fullscreen-p
+	  (restore-frame)
+	(maximize-frame)))
+
+(global-set-key (kbd "M-RET") 'my-toggle-fullscreen)
+(my-toggle-fullscreen)
 (server-start)
