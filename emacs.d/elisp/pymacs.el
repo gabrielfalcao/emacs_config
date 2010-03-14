@@ -53,7 +53,7 @@
       (setq enable-multibyte-characters flag))))
 
 (defalias 'pymacs-report-error (symbol-function 'error))
-
+
 ;;; Published variables and functions.
 
 (defvar pymacs-load-path nil

@@ -42,14 +42,12 @@
 ; Python mode
 (load-file "~/.emacs.d/elisp/python-mode.el")
 
+(setenv "PYMACS_PYTHON" "python2.5") 
 
 ;; Auto completion inline
 (load-file "~/.emacs.d/elisp/auto-complete.el") ;;loading
 (require 'auto-complete);; preparing
 (global-auto-complete-mode t) ;;enabling
-
-(load-file "~/.emacs.d/elisp/flymake.el")
-(load-file "~/.emacs.d/elisp/pymacs.el")
 
 (load-file "~/.emacs.d/elisp/two-mode-mode.el")
 (load-file "~/.emacs.d/elisp/bar-cursor.el")
@@ -299,6 +297,7 @@
 ;; (autoload 'pymacs-apply "pymacs")
 ;; (autoload 'pymacs-call "pymacs")
 
+(load-library "init_python")
 
 (set-default-font "Monaco-14")
 
@@ -314,7 +313,3 @@
 (global-set-key (kbd "M-RET") 'my-toggle-fullscreen)
 (my-toggle-fullscreen)
 (server-start)
-
-
-(load-file "~/.emacs.d/elisp/init_python.el")
-(load-library "init_python")
