@@ -33,13 +33,23 @@
 (setq-default html-basic-offset 4)
 (setq tab-width 4) ; or any other preferred value
 
+(setq python-python-command "ipython")
 ;; Expanding the load-path
 (setq load-path (cons "~/.emacs.d/elisp/" load-path))
 ;(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
 ; Python mode
-;(load-file "~/.emacs.d/elisp/python.el")
+(load-file "~/.emacs.d/elisp/python-mode.el")
+
+
+;; Auto completion inline
+(load-file "~/.emacs.d/elisp/auto-complete.el") ;;loading
+(require 'auto-complete);; preparing
+(global-auto-complete-mode t) ;;enabling
+
+(load-file "~/.emacs.d/elisp/flymake.el")
+(load-file "~/.emacs.d/elisp/pymacs.el")
 
 (load-file "~/.emacs.d/elisp/two-mode-mode.el")
 (load-file "~/.emacs.d/elisp/bar-cursor.el")
@@ -59,7 +69,7 @@
 
 (setq color-theme-is-global t)
 
-(color-theme-arjen)
+(color-theme-twilight)
 ;;(color-theme-blippblopp) ;; best light theme ! (default)
 ;;(color-theme-ld-dark) ;; pretty cool dark theme
 ;;(color-theme-hober) ;; good dark theme
@@ -220,7 +230,7 @@
 ;; Free Software Foundation, Inc.,   51 Franklin Street, Fifth Floor,
 ;; Boston, MA  02110-1301  USA
 
-(require 'twit)
+;;(require 'twit)
 
 (defvar twit-user "gabrielfalcao")
 
@@ -304,3 +314,7 @@
 (global-set-key (kbd "M-RET") 'my-toggle-fullscreen)
 (my-toggle-fullscreen)
 (server-start)
+
+
+(load-file "~/.emacs.d/elisp/init_python.el")
+(load-library "init_python")
