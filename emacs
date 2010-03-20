@@ -42,7 +42,7 @@
 ; Python mode
 (load-file "~/.emacs.d/elisp/python-mode.el")
 
-(setenv "PYMACS_PYTHON" "python2.5") 
+(setenv "PYMACS_PYTHON" "python2.5")
 
 ;; Auto completion inline
 (load-file "~/.emacs.d/elisp/auto-complete.el") ;;loading
@@ -67,7 +67,7 @@
 
 (setq color-theme-is-global t)
 
-(color-theme-twilight)
+(color-theme-blackboard)
 ;;(color-theme-blippblopp) ;; best light theme ! (default)
 ;;(color-theme-ld-dark) ;; pretty cool dark theme
 ;;(color-theme-hober) ;; good dark theme
