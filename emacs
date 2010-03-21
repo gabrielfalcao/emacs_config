@@ -33,6 +33,7 @@
 (setq-default html-basic-offset 4)
 (setq tab-width 4) ; or any other preferred value
 
+(setq python-python-command "ipython")
 ;; Expanding the load-path
 (setq load-path (cons "~/.emacs.d/elisp/" load-path))
 ;(set-default-font "Monospace-9")
@@ -40,10 +41,19 @@
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
 (set-default-font "Monaco-10")
 ; Python mode
-;(load-file "~/.emacs.d/elisp/python.el")
+(load-file "~/.emacs.d/elisp/python-mode.el")
+
+(setenv "PYMACS_PYTHON" "python2.5")
+
+;; Auto completion inline
+(load-file "~/.emacs.d/elisp/auto-complete.el") ;;loading
+(require 'auto-complete);; preparing
+(global-auto-complete-mode t) ;;enabling
 
 (load-file "~/.emacs.d/elisp/two-mode-mode.el")
 (load-file "~/.emacs.d/elisp/django-html-mode.el")
+(load-file "~/.emacs.d/elisp/bar-cursor.el")
+(load-file "~/.emacs.d/elisp/maxframe.el")
 ;; making new emacs windows have a pretty font
 ;;(add-to-list 'default-frame-alist '(font . "Bitstream Vera SansMono-8"))
 
@@ -55,11 +65,11 @@
 (load "~/.emacs.d/elisp/color-theme-blackboard.el")
 (load "~/.emacs.d/elisp/color-theme-zenburn.el")
 (load "~/.emacs.d/elisp/color-theme-sunburst.el")
+(load "~/.emacs.d/elisp/color-theme-arjen.el")
 
 (setq color-theme-is-global t)
 
 (color-theme-blackboard)
-(color-theme-sunburst)
 ;;(color-theme-blippblopp) ;; best light theme ! (default)
 ;;(color-theme-ld-dark) ;; pretty cool dark theme
 ;;(color-theme-hober) ;; good dark theme
@@ -75,7 +85,7 @@
 (yas/load-directory "~/.emacs.d/elisp/snippets")
 
 ;; Exploring more goodies =)
-(tool-bar-mode)
+;;(tool-bar-mode)
 (bar-cursor-mode)
 
 ;;(global-linum-mode)
@@ -222,7 +232,7 @@
 ;; Free Software Foundation, Inc.,   51 Franklin Street, Fifth Floor,
 ;; Boston, MA  02110-1301  USA
 
-(require 'twit)
+;;(require 'twit)
 
 (defvar twit-user "gabrielfalcao")
 
@@ -291,4 +301,20 @@
 ;; (autoload 'pymacs-apply "pymacs")
 ;; (autoload 'pymacs-call "pymacs")
 
+(load-library "init_python")
+
+(set-default-font "Monaco-10")
+
+(defvar my-fullscreen-p t "Check if fullscreen is on or off")
+
+(defun my-toggle-fullscreen ()
+  (interactive)
+  (setq my-fullscreen-p (not my-fullscreen-p))
+  (if my-fullscreen-p
+	  (restore-frame)
+	(maximize-frame)))
+
+(global-set-key (kbd "M-RET") 'my-toggle-fullscreen)
+(my-toggle-fullscreen)
+(tool-bar-mode)
 (server-start)
