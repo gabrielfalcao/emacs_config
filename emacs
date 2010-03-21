@@ -38,11 +38,12 @@
 ;(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
-(set-default-font "Monaco-9")
+(set-default-font "Monaco-10")
 ; Python mode
 ;(load-file "~/.emacs.d/elisp/python.el")
 
 (load-file "~/.emacs.d/elisp/two-mode-mode.el")
+(load-file "~/.emacs.d/elisp/django-html-mode.el")
 ;; making new emacs windows have a pretty font
 ;;(add-to-list 'default-frame-alist '(font . "Bitstream Vera SansMono-8"))
 
@@ -177,18 +178,20 @@
       (append
        (list
         '("\\.sgm$" . sgml-mode)
-        '("\\.zpt$" . html-mode)
-        '("\\.html$" . html-mode)
+        '("\\.zpt$" . django-html-mode)
+        '("\\.html$" . django-html-mode)
         '(".emacs" . lisp-mode)
         '("emacs" . lisp-mode)
         '("Makefile.*" . makefile-mode)
-        '("\\.pt$" . html-mode)
+        '("\\.pt$" . django-html-mode)
         '("\\.py$" . python-mode)
         '("\\.rb$" . ruby-mode)
+        '("\\.feature$" . ruby-mode)
         '("\\.tex$" . tex-mode)
         '("\\.erl$" . erlang-mode)
         '("\\.php$" . php-mode)
-        '("\\.acc$" . ruby-mode)
+        '("\\.acc$" . python-mode)
+        '("\\.java$" . java-mode)
         '("\\.yml$" . yaml-mode)
         '("\\.yaml$" . yaml-mode)
         '("\\.rst$" . rst-mode)
@@ -288,6 +291,4 @@
 ;; (autoload 'pymacs-apply "pymacs")
 ;; (autoload 'pymacs-call "pymacs")
 
-
-(set-default-font "Monaco-9")
 (server-start)
