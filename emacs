@@ -49,6 +49,9 @@
 (load-file "~/.emacs.d/elisp/auto-complete.el") ;;loading
 (require 'auto-complete);; preparing
 (global-auto-complete-mode t) ;;enabling
+(define-key ac-complete-mode-map "\C-n" 'ac-next)
+(define-key ac-complete-mode-map "\C-p" 'ac-previous)
+(setq ac-dwim t)
 
 (load-file "~/.emacs.d/elisp/two-mode-mode.el")
 (load-file "~/.emacs.d/elisp/django-html-mode.el")
@@ -69,7 +72,7 @@
 
 (setq color-theme-is-global t)
 
-(color-theme-blackboard)
+(color-theme-sunburst)
 ;;(color-theme-blippblopp) ;; best light theme ! (default)
 ;;(color-theme-ld-dark) ;; pretty cool dark theme
 ;;(color-theme-hober) ;; good dark theme
