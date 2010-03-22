@@ -198,6 +198,8 @@
         '("Makefile.*" . makefile-mode)
         '("\\.pt$" . django-html-mode)
         '("\\.py$" . python-mode)
+        '("\\.migration$" . sql-mode)
+        '("\\.sql$" . sql-mode)
         '("\\.rb$" . ruby-mode)
         '("\\.feature$" . ruby-mode)
         '("\\.tex$" . tex-mode)
