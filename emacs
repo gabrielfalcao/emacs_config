@@ -87,8 +87,6 @@
 ;; \C-c ,f - Verify all features in project. (Available in feature and ruby files)
 ;; \C-c ,r - Repeat the last verification process.
 
-(add-to-list 'load-path "~/.emacs.d/elisp/feature-mode")
-
 ;; textmate-like snippets
 ;; http://code.google.com/p/yasnippet/
 (add-to-list 'load-path "~/.emacs.d/elisp/yasnippet")
@@ -196,9 +194,6 @@
  '(rst-level-3-face ((t (:background "white" :foreground "black"))) t)
  '(rst-level-4-face ((t (:background "grey64"))) t))
 
-(require 'feature-mode)
-(add-to-list 'auto-mode-alist )
-
 (setq auto-mode-alist
       (append
        (list
@@ -208,8 +203,6 @@
         '(".emacs" . lisp-mode)
         '("emacs" . lisp-mode)
         '("\\.el$" . lisp-mode)
-        '("\.feature$" . feature-mode)
-        '("\.acc$" . feature-mode)
         '("Makefile.*" . makefile-mode)
         '("\\.pt$" . django-html-mode)
         '("\\.py$" . python-mode)
