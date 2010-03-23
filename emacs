@@ -36,6 +36,7 @@
 (setq python-python-command "ipython")
 ;; Expanding the load-path
 (setq load-path (cons "~/.emacs.d/elisp/" load-path))
+(setq default-directory "~/")
 ;(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
@@ -79,6 +80,18 @@
 ;;(color-theme-andreas) ;; almost good light theme
 (setq color-theme-is-global nil)
 (setq-default indent-tabs-mode nil)
+
+;; cucumber.el -- Emacs mode for editing plain text user stories
+;; \C-c ,v - Verify all scenarios in the current buffer file.
+;; \C-c ,s - Verify the scenario under the point in the current buffer.
+;; \C-c ,f - Verify all features in project. (Available in feature and ruby files)
+;; \C-c ,r - Repeat the last verification process.
+
+(add-to-list 'load-path "~/.emacs.d/elisp/feature-mode")
+
+(require 'feature-mode)
+(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
+
 
 ;; textmate-like snippets
 ;; http://code.google.com/p/yasnippet/
