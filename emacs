@@ -9,7 +9,7 @@
   ;; If there is more than one, they won't work right.
  '(browse-url-browser-function (quote browse-url-epiphany))
  '(column-number-mode t)
- '(face-font-family-alternatives (quote (("Monaco-10") ("helv" "helvetica" "arial" "fixed"))))
+ '(face-font-family-alternatives (quote (("Monaco-14") ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-echo-area-message "gabriel")
  '(initial-buffer-choice t)
  '(initial-scratch-message "")
@@ -40,7 +40,7 @@
 ;(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
-(set-default-font "Monaco-10")
+(set-default-font "Monaco-14")
 ; Python mode
 (load-file "~/.emacs.d/elisp/python-mode.el")
 
@@ -154,7 +154,7 @@
 ;; Yes, I'm a web developer =/
 (add-hook 'javascript-mode-hook 'js-mode)
 (add-hook 'before-make-frame-hook '(lambda()
-    (set-default-font "Monaco-10")
+    (set-default-font "Monaco-14")
 ))
 (autoload 'js-mode "js-mode" nil t)
 (autoload 'css-mode "css-mode" "Mode for editing CSS files" t)
@@ -316,7 +316,7 @@
 
 (load-library "init_python")
 
-(set-default-font "Monaco-10")
+(set-default-font "Monaco-14")
 
 (defvar my-fullscreen-p t "Check if fullscreen is on or off")
 
