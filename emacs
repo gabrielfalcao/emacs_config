@@ -73,7 +73,7 @@
 
 (setq color-theme-is-global t)
 
-(color-theme-sunburst)
+(color-theme-arjen)
 ;;(color-theme-blippblopp) ;; best light theme ! (default)
 ;;(color-theme-ld-dark) ;; pretty cool dark theme
 ;;(color-theme-hober) ;; good dark theme
@@ -318,6 +318,13 @@
 
 (set-default-font "Monaco-14")
 
+(defun maximize-frame ()
+  (interactive)
+  (set-frame-position (selected-frame) 0 0)
+  (set-frame-size (selected-frame) 1000 1000))
+
+(global-set-key (kbd "<s-return>") 'maximize-frame)
+
 (defvar my-fullscreen-p t "Check if fullscreen is on or off")
 
 (defun my-toggle-fullscreen ()
@@ -329,5 +336,4 @@
 
 (global-set-key (kbd "M-RET") 'my-toggle-fullscreen)
 (my-toggle-fullscreen)
-(tool-bar-mode)
 (server-start)
