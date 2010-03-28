@@ -9,7 +9,7 @@
   ;; If there is more than one, they won't work right.
  '(browse-url-browser-function (quote browse-url-epiphany))
  '(column-number-mode t)
- '(face-font-family-alternatives (quote (("Monaco-14") ("helv" "helvetica" "arial" "fixed"))))
+ '(face-font-family-alternatives (quote (("Monaco-12") ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-echo-area-message "gabriel")
  '(initial-buffer-choice t)
  '(initial-scratch-message "")
@@ -40,11 +40,15 @@
 ;(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
-(set-default-font "Monaco-14")
+(set-default-font "Monaco-12")
 ; Python mode
 (load-file "~/.emacs.d/elisp/python-mode.el")
 
 (setenv "PYMACS_PYTHON" "python2.5")
+(setq mac-option-key-is-meta t)
+(setq mac-command-key-is-meta t)
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'meta)
 
 ;; Auto completion inline
 (load-file "~/.emacs.d/elisp/auto-complete.el") ;;loading
@@ -70,10 +74,15 @@
 (load "~/.emacs.d/elisp/color-theme-zenburn.el")
 (load "~/.emacs.d/elisp/color-theme-sunburst.el")
 (load "~/.emacs.d/elisp/color-theme-arjen.el")
+(load "~/.emacs.d/elisp/inspiration630889.el")
+(load "~/.emacs.d/elisp/inspiration715644.el")
+(load "~/.emacs.d/elisp/inspiration733956.el")
+(load "~/.emacs.d/elisp/inspiration976777.el")
 
 (setq color-theme-is-global t)
 
-(color-theme-arjen)
+(inspiration-733956)
+;;(color-theme-tangotango)
 ;;(color-theme-blippblopp) ;; best light theme ! (default)
 ;;(color-theme-ld-dark) ;; pretty cool dark theme
 ;;(color-theme-hober) ;; good dark theme
@@ -154,8 +163,11 @@
 ;; Yes, I'm a web developer =/
 (add-hook 'javascript-mode-hook 'js-mode)
 (add-hook 'before-make-frame-hook '(lambda()
-    (set-default-font "Monaco-14")
+    (set-default-font "Monaco-12")
 ))
+(add-hook 'message-mode-hook 'color-theme-tangotango)
+(add-hook 'gnus-article-mode-hook 'color-theme-tangotango)
+
 (autoload 'js-mode "js-mode" nil t)
 (autoload 'css-mode "css-mode" "Mode for editing CSS files" t)
 
@@ -316,7 +328,7 @@
 
 (load-library "init_python")
 
-(set-default-font "Monaco-14")
+(set-default-font "Monaco-12")
 
 (defun maximize-frame ()
   (interactive)
@@ -324,16 +336,7 @@
   (set-frame-size (selected-frame) 1000 1000))
 
 (global-set-key (kbd "<s-return>") 'maximize-frame)
+(global-set-key (kbd "M-RET") 'ns-toggle-fullscreen)
 
-(defvar my-fullscreen-p t "Check if fullscreen is on or off")
-
-(defun my-toggle-fullscreen ()
-  (interactive)
-  (setq my-fullscreen-p (not my-fullscreen-p))
-  (if my-fullscreen-p
-	  (restore-frame)
-	(maximize-frame)))
-
-(global-set-key (kbd "M-RET") 'my-toggle-fullscreen)
-(my-toggle-fullscreen)
+(ns-toggle-fullscreen)
 (server-start)
