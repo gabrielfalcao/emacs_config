@@ -1,3 +1,6 @@
 #name : import ipdb;ipdb.set_trace()
 # --
+import sys
+sys.stdout = sys.__stdout__
+sys.stderr = sys.__stderr__
 import ipdb; ipdb.set_trace()

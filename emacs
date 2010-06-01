@@ -40,6 +40,8 @@
 ;(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
+(setenv "PATH" (concat "/usr/local/bin:/usr/local/git/bin:" (concat (getenv "HOME") "/usr/bin:") (getenv "PATH")))
+
 (set-default-font "Monaco-12")
 ; Python mode
 (load-file "~/.emacs.d/elisp/python-mode.el")
@@ -206,12 +208,17 @@
  '(rst-level-3-face ((t (:background "white" :foreground "black"))) t)
  '(rst-level-4-face ((t (:background "grey64"))) t))
 
+(autoload 'markdown-mode "markdown-mode.el"
+   "Major mode for editing Markdown files" t)
+
 (setq auto-mode-alist
       (append
        (list
         '("\\.sgm$" . sgml-mode)
         '("\\.zpt$" . django-html-mode)
         '("\\.html$" . django-html-mode)
+        '("\\.md$" . markdown-mode)
+        '("\\.markdown$" . markdown-mode)
         '(".emacs" . lisp-mode)
         '("emacs" . lisp-mode)
         '("\\.el$" . lisp-mode)
@@ -223,6 +230,7 @@
         '("\\.rb$" . ruby-mode)
         '("\\.feature$" . ruby-mode)
         '("\\.tex$" . tex-mode)
+        '("\\.sh$" . shell-script-mode)
         '("\\.erl$" . erlang-mode)
         '("\\.php$" . php-mode)
         '("\\.acc$" . python-mode)
@@ -279,6 +287,14 @@
   (font-lock-add-keywords 'latex-mode
    '(("\\<\\(FIXME\\|HACK\\|XXX\\|TODO\\):?" 1 font-lock-warning-face prepend)))
 
+(defun make-all ()
+  (interactive)
+  (shell-command "make all"))
+
+(defun make-build ()
+  (interactive)
+  (shell-command "make build"))
+
 (global-set-key (kbd "M-#") 'uncomment-region)
 (global-set-key (kbd "C-#") 'comment-region)
 (global-set-key (kbd "M-SPC") 'hippie-expand)
@@ -291,8 +307,8 @@
 (global-set-key (kbd "C-.") 'increase-left-margin)
 (global-set-key (kbd "C-,") 'decrease-left-margin)
 ;; compile/make
-(global-set-key (kbd "<f5>")   'recompile)
-(global-set-key (kbd "S-<f5>") 'compile)
+(global-set-key (kbd "<f5>")   'make-all)
+(global-set-key (kbd "S-<f5>") 'make-build)
 
 ;; fullscreen editing
 (defun switch-full-screen ()
@@ -338,5 +354,8 @@
 (global-set-key (kbd "<s-return>") 'maximize-frame)
 (global-set-key (kbd "M-RET") 'ns-toggle-fullscreen)
 
-(ns-toggle-fullscreen)
+;; (ns-toggle-fullscreen)
+(maximize-frame)
+(maximize-frame)
+(maximize-frame)
 (server-start)
