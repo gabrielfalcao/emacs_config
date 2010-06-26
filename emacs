@@ -163,7 +163,6 @@
 ;;(global-hl-line-mode 1)
 
 ;; Yes, I'm a web developer =/
-(add-hook 'javascript-mode-hook 'js-mode)
 (add-hook 'before-make-frame-hook '(lambda()
     (set-default-font "Monaco-12")
 ))
@@ -173,8 +172,6 @@
 (autoload 'js-mode "js-mode" nil t)
 (autoload 'css-mode "css-mode" "Mode for editing CSS files" t)
 
-(setq auto-mode-alist
-     (cons '("\\.js\\'" . javscript-mode) auto-mode-alist))
 (setq auto-mode-alist
      (cons '("\\.css\\'" . css-mode) auto-mode-alist))
 (setq cssm-indent-function #'cssm-c-style-indenter)
@@ -335,8 +332,9 @@
 (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
 (put 'downcase-region 'disabled nil)
-(autoload 'javascript-mode "javascript" nil t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
+(autoload #'espresso-mode "espresso" "Start espresso-mode" t)
+(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
 ;; (autoload 'pymacs-load "pymacs" nil t)
 ;; (autoload 'pymacs-eval "pymacs" nil t)
 ;; (autoload 'pymacs-apply "pymacs")

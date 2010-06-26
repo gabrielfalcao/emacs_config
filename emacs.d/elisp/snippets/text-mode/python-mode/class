@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # name: class
+# expand-env: (yas/indent-line 'fixed)
 # contributor: Orestis Markou
 # contributor: Nishio Hirokazu
 # contributor: Yasser González Fernández <yglez@uh.cu>
