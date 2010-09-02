@@ -1,0 +1,7 @@
+# -*- coding: utf-8 -*-
+# name: test
+# contributor: Gabriel Falcão <gabriel@nacaolivre.org>
+# --
+def test_${1:name}():
+    "deve ${1:$(replace-regexp-in-string "_" " " text)}"
+    $0

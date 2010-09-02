@@ -61,7 +61,6 @@
 (setq ac-dwim t)
 
 (load-file "~/.emacs.d/elisp/two-mode-mode.el")
-(load-file "~/.emacs.d/elisp/django-html-mode.el")
 (load-file "~/.emacs.d/elisp/bar-cursor.el")
 (load-file "~/.emacs.d/elisp/maxframe.el")
 ;; making new emacs windows have a pretty font
@@ -212,15 +211,15 @@
       (append
        (list
         '("\\.sgm$" . sgml-mode)
-        '("\\.zpt$" . django-html-mode)
-        '("\\.html$" . django-html-mode)
+        '("\\.zpt$" . html-mode)
+        '("\\.html$" . html-mode)
         '("\\.md$" . markdown-mode)
         '("\\.markdown$" . markdown-mode)
         '(".emacs" . lisp-mode)
         '("emacs" . lisp-mode)
         '("\\.el$" . lisp-mode)
         '("Makefile.*" . makefile-mode)
-        '("\\.pt$" . django-html-mode)
+        '("\\.pt$" . html-mode)
         '("\\.py$" . python-mode)
         '("\\.migration$" . sql-mode)
         '("\\.sql$" . sql-mode)
@@ -236,6 +235,7 @@
         '("\\.yaml$" . yaml-mode)
         '("\\.rst$" . rst-mode)
         '("\\.css$" . css-mode)
+        '("\\.less$" . css-mode)
         auto-mode-alist)))
 
 (global-set-key (kbd "<up>") 'ignore)
