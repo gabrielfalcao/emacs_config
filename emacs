@@ -1,3 +1,8 @@
+;; Overwrite flymake-display-warning so that no annoying dialog box is
+;; used.
+
+;; This version uses lwarn instead of message-box in the original version.
+;; lwarn will open another window, and display the warning in there.
 ;; where to get the latest emacs snapshot gtk
 ;; deb http://emacs.orebokech.com sid main
 ;; deb-src http://emacs.orebokech.com sid main
@@ -68,6 +73,7 @@
 
 ;; color theme
 (require 'color-theme)
+
 
 (load "~/.emacs.d/elisp/color-theme-twilight.el")
 (load "~/.emacs.d/elisp/color-theme-tango.el")
@@ -171,6 +177,8 @@
 (autoload 'js-mode "js-mode" nil t)
 (autoload 'css-mode "css-mode" "Mode for editing CSS files" t)
 
+
+(load "~/.emacs.d/elisp/haml-mode.el")
 (setq auto-mode-alist
      (cons '("\\.css\\'" . css-mode) auto-mode-alist))
 (setq cssm-indent-function #'cssm-c-style-indenter)
@@ -213,6 +221,7 @@
         '("\\.sgm$" . sgml-mode)
         '("\\.zpt$" . html-mode)
         '("\\.html$" . html-mode)
+        '("\\.xml$" . xml-mode)
         '("\\.md$" . markdown-mode)
         '("\\.markdown$" . markdown-mode)
         '(".emacs" . lisp-mode)
@@ -220,11 +229,15 @@
         '("\\.el$" . lisp-mode)
         '("Makefile.*" . makefile-mode)
         '("\\.pt$" . html-mode)
+        '("\\.[hc]$" . c-mode)
         '("\\.py$" . python-mode)
         '("\\.migration$" . sql-mode)
         '("\\.sql$" . sql-mode)
         '("\\.rb$" . ruby-mode)
+        '("Gemfile" . ruby-mode)
+        '("Rakefile" . ruby-mode)
         '("\\.feature$" . ruby-mode)
+        '("\\.ru$" . ruby-mode)
         '("\\.tex$" . tex-mode)
         '("\\.sh$" . shell-script-mode)
         '("\\.erl$" . erlang-mode)
@@ -233,6 +246,7 @@
         '("\\.java$" . java-mode)
         '("\\.yml$" . yaml-mode)
         '("\\.yaml$" . yaml-mode)
+        '("\\.haml$" . haml-mode)
         '("\\.rst$" . rst-mode)
         '("\\.css$" . css-mode)
         '("\\.less$" . css-mode)
@@ -357,3 +371,37 @@
 (maximize-frame)
 (maximize-frame)
 (server-start)
+(put 'upcase-region 'disabled nil)
+
+(defun flymake-display-warning (warning)
+  "Display a warning to the user, using lwarn"
+  (lwarn 'flymake :warning warning))
+
+;; Using lwarn might be kind of annoying on its own, popping up windows and
+;; what not. If you prefer to recieve the warnings in the mini-buffer, use:
+(defun flymake-display-warning (warning)
+  "Display a warning to the user, using lwarn"
+  (message warning))
+
+;; (defcustom flymake-allowed-file-name-masks
+;;   '(("\\.\\(?:c\\(?:pp\\|xx\\|\\+\\+\\)?\\|CC\\)\\'" flymake-simple-make-init)
+;;     ;("\\.xml\\'" flymake-xml-init)
+;;     ;("\\.html?\\'" flymake-xml-init)
+;;     ("\\.cs\\'" flymake-simple-make-init)
+;;     ("\\.p[ml]\\'" flymake-perl-init)
+;;     ("\\.php[345]?\\'" flymake-php-init)
+;;     ("\\.h\\'" flymake-master-make-header-init flymake-master-cleanup)
+;;     ("\\.java\\'" flymake-simple-make-java-init flymake-simple-java-cleanup)
+;;     ("[0-9]+\\.tex\\'" flymake-master-tex-init flymake-master-cleanup)
+;;     ("\\.tex\\'" flymake-simple-tex-init)
+;;     ("\\.idl\\'" flymake-simple-make-init)
+;;     ;; ("\\.cpp\\'" 1)
+;;     ;; ("\\.java\\'" 3)
+;;     ;; ("\\.h\\'" 2 ("\\.cpp\\'" "\\.c\\'")
+;;     ;; ("[ \t]*#[ \t]*include[ \t]*\"\\([\w0-9/\\_\.]*[/\\]*\\)\\(%s\\)\"" 1 2))
+;;     ;; ("\\.idl\\'" 1)
+;;     ;; ("\\.odl\\'" 1)
+;;     ;; ("[0-9]+\\.tex\\'" 2 ("\\.tex\\'")
+;;     ;; ("[ \t]*\\input[ \t]*{\\(.*\\)\\(%s\\)}" 1 2 ))
+;;     ;; ("\\.tex\\'" 1)
+;;     ))
