@@ -2,7 +2,7 @@
 # name: test
 # contributor: Gabriel Falcão <gabriel@nacaolivre.org>
 # --
-def test_${1:$(replace-regexp-in-string " " "_" (downcase text))}_should_${2:$(replace-regexp-in-string " " "_" (downcase text))}():
+def test_${1:$(replace-regexp-in-string "[^a-zA-Z0-9]" "_" (downcase text))}_should_${2:$(replace-regexp-in-string "[^a-zA-Z0-9]" "_" (downcase text))}():
     u"${1:objeto} deveria ${2:fazer_algo}"
     assert that(${3:"this"}).equals(${4:"this"})
     $0
