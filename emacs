@@ -240,6 +240,7 @@
         '("\\.ru$" . ruby-mode)
         '("\\.tex$" . tex-mode)
         '("\\.sh$" . shell-script-mode)
+        '(".*bash.*$" . shell-script-mode)
         '("\\.erl$" . erlang-mode)
         '("\\.php$" . php-mode)
         '("\\.acc$" . python-mode)
