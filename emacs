@@ -50,6 +50,8 @@
 (set-default-font "Monaco-12")
 ; Python mode
 (load-file "~/.emacs.d/elisp/python-mode.el")
+; Php mode
+(load-file "~/.emacs.d/elisp/php-mode.el")
 
 (setenv "PYMACS_PYTHON" "python2.5")
 (setq mac-option-key-is-meta t)
