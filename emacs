@@ -49,7 +49,7 @@
 
 (set-default-font "Monaco-12")
 ; Python mode
-(load-file "~/.emacs.d/elisp/python-mode.el")
+(load-file "~/.emacs.d/elisp/python.el")
 ; Php mode
 (load-file "~/.emacs.d/elisp/php-mode.el")
 
@@ -73,6 +73,7 @@
 ;; making new emacs windows have a pretty font
 ;;(add-to-list 'default-frame-alist '(font . "Bitstream Vera SansMono-8"))
 
+(require 'python)
 ;; color theme
 (require 'color-theme)
 
@@ -187,20 +188,20 @@
 
 ;; Python stuff !
 
-(when (load "flymake" t)
-  (defun flymake-pyflakes-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "pyflakes" (list local-file))))
-  (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.py\\'" flymake-pyflakes-init)))
+;; (when (load "flymake" t)
+;;   (defun flymake-pyflakes-init ()
+;;     (let* ((temp-file (flymake-init-create-temp-buffer-copy
+;;                        'flymake-create-temp-inplace))
+;;            (local-file (file-relative-name
+;;                         temp-file
+;;                         (file-name-directory buffer-file-name))))
+;;       (list "pyflakes" (list local-file))))
+;;   (add-to-list 'flymake-allowed-file-name-masks
+;;                '("\\.py\\'" flymake-pyflakes-init)))
 
-(autoload 'py-complete-init "py-complete")
-;(add-hook 'python-mode-hook 'py-complete-init) pisses me off
-(add-hook 'python-mode-hook 'flymake-mode)
+;; (autoload 'py-complete-init "py-complete")
+;; ;(add-hook 'describe-mode-hook 'py-complete-init) pisses me off
+;; (add-hook 'describe-mode-hook 'flymake-mode)
 
 ;; better flymake colors
 (custom-set-faces
@@ -232,7 +233,7 @@
         '("Makefile.*" . makefile-mode)
         '("\\.pt$" . html-mode)
         '("\\.[hc]$" . c-mode)
-        '("\\.py$" . python-mode)
+        '("\\.py$" . describe-mode)
         '("\\.migration$" . sql-mode)
         '("\\.sql$" . sql-mode)
         '("\\.rb$" . ruby-mode)
@@ -245,7 +246,7 @@
         '(".*bash.*$" . shell-script-mode)
         '("\\.erl$" . erlang-mode)
         '("\\.php$" . php-mode)
-        '("\\.acc$" . python-mode)
+        '("\\.acc$" . describe-mode)
         '("\\.java$" . java-mode)
         '("\\.yml$" . yaml-mode)
         '("\\.yaml$" . yaml-mode)
@@ -292,7 +293,7 @@
 
 ;; electric bindings for help mode
 (require 'ehelp)
-(font-lock-add-keywords 'python-mode
+(font-lock-add-keywords 'describe-mode
  '(("\\<\\(FIXME\\|HACK\\|XXX\\|TODO\\):?" 1 font-lock-warning-face prepend)))
 
  (font-lock-add-keywords 'c-mode
