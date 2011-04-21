@@ -6,6 +6,9 @@
 ;; where to get the latest emacs snapshot gtk
 ;; deb http://emacs.orebokech.com sid main
 ;; deb-src http://emacs.orebokech.com sid main
+(setq load-path (cons "~/.emacs.d/elisp/" load-path))
+(setq default-directory "~/Projetos/")
+(load "~/.emacs.d/elisp/flymake.el")
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
@@ -40,8 +43,6 @@
 
 (setq python-python-command "ipython")
 ;; Expanding the load-path
-(setq load-path (cons "~/.emacs.d/elisp/" load-path))
-(setq default-directory "~/")
 ;(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
@@ -188,16 +189,16 @@
 
 ;; Python stuff !
 
-;; (when (load "flymake" t)
-;;   (defun flymake-pyflakes-init ()
-;;     (let* ((temp-file (flymake-init-create-temp-buffer-copy
-;;                        'flymake-create-temp-inplace))
-;;            (local-file (file-relative-name
-;;                         temp-file
-;;                         (file-name-directory buffer-file-name))))
-;;       (list "pyflakes" (list local-file))))
-;;   (add-to-list 'flymake-allowed-file-name-masks
-;;                '("\\.py\\'" flymake-pyflakes-init)))
+(when (load "flymake" t)
+  (defun flymake-pyflakes-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (list "pyflakes" (list local-file))))
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.py\\'" flymake-pyflakes-init)))
 
 ;; (autoload 'py-complete-init "py-complete")
 ;; ;(add-hook 'describe-mode-hook 'py-complete-init) pisses me off
@@ -338,11 +339,11 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'html-mode-hook
           (lambda()
-            (setq sgml-basic-offset 4)
+            (setq sgml-basic-offset 2)
             (setq indent-tabs-mode t)))
 
-(setq html-indent-level 4)
-(setq cssm-indent-level 4)
+(setq html-indent-level 2)
+(setq cssm-indent-level 2)
 (setq cssm-newline-before-closing-bracket t)
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
@@ -374,7 +375,7 @@
 (maximize-frame)
 (maximize-frame)
 (maximize-frame)
-(server-start)
+
 (put 'upcase-region 'disabled nil)
 
 (defun flymake-display-warning (warning)
