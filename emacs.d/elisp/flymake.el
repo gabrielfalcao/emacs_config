@@ -271,8 +271,8 @@ are the string substitutions (see `format')."
 (defcustom flymake-allowed-file-name-masks
   '(("\\.c\\'" flymake-simple-make-init)
     ("\\.cpp\\'" flymake-simple-make-init)
-    ("\\.xml\\'" flymake-xml-init)
-    ("\\.html?\\'" flymake-xml-init)
+;;    ("\\.xml\\'" flymake-xml-init)
+;;    ("\\.html?\\'" flymake-xml-init)
     ("\\.cs\\'" flymake-simple-make-init)
     ("\\.p[ml]\\'" flymake-perl-init)
     ("\\.php[345]?\\'" flymake-php-init)

@@ -167,6 +167,9 @@
       (delete-char 1)
       (move-to-column previous-column))))
 
+;; Turning regexp into the default search method
+(global-set-key "\C-s" 'isearch-forward-regexp)
+
 ;; Now bind the delete line function to the F8 key
 (global-set-key [f8] 'nuke-line)
 ;;(global-hl-line-mode 1)
@@ -410,3 +413,16 @@
 ;;     ;; ("[ \t]*\\input[ \t]*{\\(.*\\)\\(%s\\)}" 1 2 ))
 ;;     ;; ("\\.tex\\'" 1)
 ;;     ))
+
+;; to make it work install flake8: sudo pip install flake8
+
+(when (load "flymake" t)
+  (defun flymake-pyflakes-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+               'flymake-create-temp-inplace))
+       (local-file (file-relative-name
+            temp-file
+            (file-name-directory buffer-file-name))))
+      (list "/usr/local/bin/flake8"  (list local-file))))
+   (add-to-list 'flymake-allowed-file-name-masks
+             '("\\.py\\'" flymake-pyflakes-init)))
