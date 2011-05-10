@@ -2,7 +2,9 @@
 # name: test
 # contributor: Gabriel Falcão <gabriel@nacaolivre.org>
 # --
+from sure import that
+
 def test_${1:$(replace-regexp-in-string "[^a-zA-Z0-9]" "_" (downcase text))}_should_${2:$(replace-regexp-in-string "[^a-zA-Z0-9]" "_" (downcase text))}():
-    u"${1:objeto} deveria ${2:fazer_algo}"
+    u"${1:object} should ${2:do something}"
     assert that(${3:"this"}).equals(${4:"this"})
     $0
