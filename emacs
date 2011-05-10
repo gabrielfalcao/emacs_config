@@ -52,6 +52,8 @@
 (load-file "~/.emacs.d/elisp/python.el")
 ; Php mode
 (load-file "~/.emacs.d/elisp/php-mode.el")
+; Feature mode  (lettuce)
+(load-file "~/.emacs.d/elisp/feature-mode.el")
 
 (setenv "PYMACS_PYTHON" "python2.5")
 (setq mac-option-key-is-meta t)
@@ -218,6 +220,7 @@
 (autoload 'markdown-mode "markdown-mode.el"
    "Major mode for editing Markdown files" t)
 
+(require 'feature-mode)
 (setq auto-mode-alist
       (append
        (list
@@ -239,7 +242,7 @@
         '("\\.rb$" . ruby-mode)
         '("Gemfile" . ruby-mode)
         '("Rakefile" . ruby-mode)
-        '("\\.feature$" . ruby-mode)
+        '("\\.feature$" . feature-mode)
         '("\\.ru$" . ruby-mode)
         '("\\.tex$" . tex-mode)
         '("\\.sh$" . shell-script-mode)
