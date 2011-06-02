@@ -7,7 +7,7 @@
 ;; deb http://emacs.orebokech.com sid main
 ;; deb-src http://emacs.orebokech.com sid main
 (setq load-path (cons "~/.emacs.d/elisp/" load-path))
-(setq default-directory "~/Projetos/")
+(setq default-directory "~/Projects/")
 (load "~/.emacs.d/elisp/flymake.el")
 
 (custom-set-variables
@@ -51,6 +51,7 @@
 (set-default-font "Monaco-12")
 ; Python mode
 (load-file "~/.emacs.d/elisp/python.el")
+(load-file "~/.emacs.d/elisp/sunrise-commander.el")
 ; Php mode
 (load-file "~/.emacs.d/elisp/php-mode.el")
 ; Feature mode  (lettuce)
@@ -270,6 +271,40 @@
 (require 'linum)
 (global-linum-mode)
 
+
+
+(eval-after-load "dired-aux"
+   '(add-to-list 'dired-compress-file-suffixes
+                 '("\\.zip\\'" ".zip" "unzip")))
+(eval-after-load "dired"
+  '(define-key dired-mode-map "z" 'dired-zip-files))
+(defun dired-zip-files (zip-file)
+  "Create an archive containing the marked files."
+  (interactive "sEnter name of zip file: ")
+
+  ;; create the zip file
+  (let ((zip-file (if (string-match ".zip$" zip-file) zip-file (concat zip-file ".zip"))))
+    (shell-command
+     (concat "zip "
+             zip-file
+             " "
+             (concat-string-list
+              (mapcar
+               '(lambda (filename)
+                  (file-name-nondirectory filename))
+               (dired-get-marked-files))))))
+
+  (revert-buffer)
+
+  ;; remove the mark on all the files  "*" to " "
+  ;; (dired-change-marks 42 ?\040)
+  ;; mark zip file
+  ;; (dired-mark-files-regexp (filename-to-regexp zip-file))
+  )
+
+(defun concat-string-list (list)
+   "Return a string which is a concatenation of all elements of the list separated by spaces"
+    (mapconcat '(lambda (obj) (format "%s" obj)) list " "))
 ;; Copyright (C) 2007 by Tapsell-Ferrier Limited
 
 ;; This program is free software; you can redistribute it and/or modify
