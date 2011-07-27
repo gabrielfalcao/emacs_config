@@ -7,7 +7,7 @@
 ;; deb http://emacs.orebokech.com sid main
 ;; deb-src http://emacs.orebokech.com sid main
 (setq load-path (cons "~/.emacs.d/elisp/" load-path))
-(setq default-directory "~/Projects/")
+(setq default-directory "~/projects/personal/")
 (load "~/.emacs.d/elisp/flymake.el")
 
 (custom-set-variables
@@ -49,6 +49,9 @@
 (setenv "PATH" (concat "/usr/local/bin:/usr/local/git/bin:" (concat (getenv "HOME") "/usr/bin:") (getenv "PATH")))
 
 (set-default-font "Monaco-12")
+; Lesscss mode
+(load-file "~/.emacs.d/elisp/less-css-mode.el")
+
 ; Python mode
 (load-file "~/.emacs.d/elisp/python.el")
 (load-file "~/.emacs.d/elisp/sunrise-commander.el")
@@ -259,9 +262,10 @@
         '("\\.yml$" . yaml-mode)
         '("\\.yaml$" . yaml-mode)
         '("\\.haml$" . haml-mode)
+        '("\\.jade$" . haml-mode)
         '("\\.rst$" . rst-mode)
         '("\\.css$" . css-mode)
-        '("\\.less$" . css-mode)
+        '("\\.less$" . less-css-mode)
         auto-mode-alist)))
 
 (global-set-key (kbd "<up>") 'ignore)
@@ -394,6 +398,7 @@
 (put 'downcase-region 'disabled nil)
 (autoload #'espresso-mode "espresso" "Start espresso-mode" t)
 (add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
+(add-to-list 'auto-mode-alist '("Jakefile$" . espresso-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
 ;; (autoload 'pymacs-load "pymacs" nil t)
 ;; (autoload 'pymacs-eval "pymacs" nil t)
