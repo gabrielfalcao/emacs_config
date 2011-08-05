@@ -51,6 +51,7 @@
 (set-default-font "Monaco-12")
 ; Lesscss mode
 (load-file "~/.emacs.d/elisp/less-css-mode.el")
+(load-file "~/.emacs.d/elisp/scss-mode.el")
 
 ; Python mode
 (load-file "~/.emacs.d/elisp/python.el")
@@ -59,6 +60,11 @@
 (load-file "~/.emacs.d/elisp/php-mode.el")
 ; Feature mode  (lettuce)
 (load-file "~/.emacs.d/elisp/feature-mode.el")
+
+; sass
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/elisp/scss-mode.el"))
+(autoload 'scss-mode "scss-mode")
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 
 (setenv "PYMACS_PYTHON" "python2.5")
 (setq mac-option-key-is-meta t)
