@@ -17,7 +17,7 @@
   ;; If there is more than one, they won't work right.
  '(browse-url-browser-function (quote browse-url-epiphany))
  '(column-number-mode t)
- '(face-font-family-alternatives (quote (("Monaco-12") ("helv" "helvetica" "arial" "fixed"))))
+ '(face-font-family-alternatives (quote (("Monaco-16") ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-echo-area-message "gabriel")
  '(initial-buffer-choice t)
  '(initial-scratch-message "")
@@ -43,12 +43,14 @@
 
 (setq python-python-command "ipython")
 ;; Expanding the load-path
+    (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
+    (require 'tex-site)
 ;(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
 (setenv "PATH" (concat "/usr/local/bin:/usr/local/git/bin:" (concat (getenv "HOME") "/usr/bin:") (getenv "PATH")))
 
-(set-default-font "Monaco-12")
+(set-default-font "Monaco-16")
 ; Lesscss mode
 (load-file "~/.emacs.d/elisp/less-css-mode.el")
 (load-file "~/.emacs.d/elisp/scss-mode.el")
@@ -188,7 +190,7 @@
 
 ;; Yes, I'm a web developer =/
 (add-hook 'before-make-frame-hook '(lambda()
-    (set-default-font "Monaco-12")
+    (set-default-font "Monaco-16")
 ))
 (add-hook 'message-mode-hook 'color-theme-tangotango)
 (add-hook 'gnus-article-mode-hook 'color-theme-tangotango)
@@ -258,7 +260,7 @@
         '("Rakefile" . ruby-mode)
         '("\\.feature$" . feature-mode)
         '("\\.ru$" . ruby-mode)
-        '("\\.tex$" . tex-mode)
+        '("\\.tex$" . latex-mode)
         '("\\.sh$" . shell-script-mode)
         '(".*bash.*$" . shell-script-mode)
         '("\\.erl$" . erlang-mode)
@@ -413,7 +415,7 @@
 
 (load-library "init_python")
 
-(set-default-font "Monaco-12")
+(set-default-font "Monaco-16")
 
 (defun maximize-frame ()
   (interactive)

@@ -1737,9 +1737,9 @@ Use CREATE-TEMP-F for creating temp copy."
     (list "php" (list "-f" local-file "-l"))))
 
 ;;;; tex-specific init-cleanup routines
-(defun flymake-get-tex-args (file-name)
-  ;;(list "latex" (list "-c-style-errors" file-name))
-  (list "texify" (list "--pdf" "--tex-option=-c-style-errors" file-name)))
+;; (defun flymake-get-tex-args (file-name)
+;;   ;;(list "latex" (list "-c-style-errors" file-name))
+;;   (list "texify" (list "--pdf" "--tex-option=-c-style-errors" file-name)))
 
 (defun flymake-simple-tex-init ()
   (flymake-get-tex-args (flymake-init-create-temp-buffer-copy 'flymake-create-temp-inplace)))
