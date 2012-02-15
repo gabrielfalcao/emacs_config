@@ -418,7 +418,7 @@
 ;; (autoload 'pymacs-call "pymacs")
 
 (require 'flymake-node-jshint)
-(setq flymake-node-jshint-config "~/.jshintrc-node.json") ; optional
+;;(setq flymake-node-jshint-config "~/.jshintrc-node.json") ; optional
 (add-hook 'js-mode-hook (lambda () (flymake-mode 1)))
 
 (load-library "init_python")
