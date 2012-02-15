@@ -7,7 +7,7 @@
 ;; deb http://emacs.orebokech.com sid main
 ;; deb-src http://emacs.orebokech.com sid main
 (setq load-path (cons "~/.emacs.d/elisp/" load-path))
-(setq default-directory "~/projects/personal/")
+(setq default-directory "~/projects/")
 (load "~/.emacs.d/elisp/flymake.el")
 
 (custom-set-variables
@@ -18,9 +18,9 @@
  '(browse-url-browser-function (quote browse-url-epiphany))
  '(column-number-mode t)
  '(face-font-family-alternatives (quote (("Monaco-16") ("helv" "helvetica" "arial" "fixed"))))
- '(inhibit-startup-echo-area-message "gabriel")
+ '(inhibit-startup-echo-area-message "gabrielfalcao")
  '(initial-buffer-choice t)
- '(initial-scratch-message "")
+ '(initial-scratch-message "# Be welcome, my master:\n# I hope you're up for so much hacking.\n        - Your very editor, Emacs\n\n")
  '(menu-bar-mode nil)
  '(py-beep-if-tab-change nil)
  '(safe-local-variable-values (quote ((encoding . utf-8))))
@@ -30,6 +30,7 @@
  '(size-indication-mode t)
  '(tooltip-mode nil)
  '(transient-mark-mode t))
+ '(coffee-tab-width 2)
 ;;(custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -53,7 +54,6 @@
 (set-default-font "Monaco-16")
 ; Lesscss mode
 (load-file "~/.emacs.d/elisp/less-css-mode.el")
-(load-file "~/.emacs.d/elisp/scss-mode.el")
 
 ; Python mode
 (load-file "~/.emacs.d/elisp/python.el")
@@ -63,10 +63,10 @@
 ; Feature mode  (lettuce)
 (load-file "~/.emacs.d/elisp/feature-mode.el")
 
-; sass
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/elisp/scss-mode.el"))
-(autoload 'scss-mode "scss-mode")
-(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+; Coffee-script mode
+(add-to-list 'load-path "~/.emacs.d/elisp/coffee-mode.el")
+(require 'coffee-mode)
+(setq coffee-tab-width 2)
 
 (setenv "PYMACS_PYTHON" "python2.5")
 (setq mac-option-key-is-meta t)
@@ -247,6 +247,8 @@
         '("\\.md$" . markdown-mode)
         '("\\.markdown$" . markdown-mode)
         '(".emacs" . lisp-mode)
+        '("\\.coffee$" . coffee-mode)
+        '("\\.Cakefile$" . coffee-mode)
         '("emacs" . lisp-mode)
         '("\\.el$" . lisp-mode)
         '("Makefile.*" . makefile-mode)
@@ -274,6 +276,8 @@
         '("\\.rst$" . rst-mode)
         '("\\.css$" . css-mode)
         '("\\.less$" . less-css-mode)
+        '("\\.sass$" . less-css-mode)
+        '("\\.scss$" . less-css-mode)
         auto-mode-alist)))
 
 (global-set-key (kbd "<up>") 'ignore)
@@ -413,6 +417,10 @@
 ;; (autoload 'pymacs-apply "pymacs")
 ;; (autoload 'pymacs-call "pymacs")
 
+(require 'flymake-node-jshint)
+(setq flymake-node-jshint-config "~/.jshintrc-node.json") ; optional
+(add-hook 'js-mode-hook (lambda () (flymake-mode 1)))
+
 (load-library "init_python")
 
 (set-default-font "Monaco-16")
@@ -477,3 +485,8 @@
       (list "/usr/local/bin/flake8"  (list local-file))))
    (add-to-list 'flymake-allowed-file-name-masks
              '("\\.py\\'" flymake-pyflakes-init)))
+
+(setq initial-major-mode 'python-mode)
+
+(fset 'vows2mocha
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([14 1 105 116 40 19 58 6 2 backspace 44 19 125 44 5 backspace 41 59] 0 "%d")) arg)))
