@@ -1,20 +1,20 @@
 ;; flymake-node-jshint.el -- simple flymake for JavaScript using JSHint through node-jshint
 
 ;; Author: Henrik Jegbjerg Hansen <hjh@freecode.dk>
-;; 
+;;
 ;; Released under the simplified BSD license, see LICENSE for details.
 
 ;;; Commentary;
-;; 
+;;
 ;; Inspired by:
 ;; - https://github.com/daleharvey/jshint-mode
 ;; - http://www.emacswiki.org/emacs/FlymakeJavaScript
 ;; - http://lapin-bleu.net/riviera/?p=191
 
-;;; Usage: 
-;; 
+;;; Usage:
+;;
 ;; Install jshint:
-;; 
+;;
 ;; npm install -g jshint
 ;;
 ;; Setup Emacs:

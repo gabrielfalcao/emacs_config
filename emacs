@@ -49,7 +49,7 @@
 ;(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
-(setenv "PATH" (concat "/usr/local/bin:/usr/local/git/bin:" (concat (getenv "HOME") "/usr/bin:") (getenv "PATH")))
+(setenv "PATH" (concat "/Users/gabrielfalcao/.nvm/v0.6.10/bin:/usr/local/bin:/usr/local/git/bin:" (concat (getenv "HOME") "/usr/bin:") (getenv "PATH")))
 
 (set-default-font "Monaco-16")
 ; Lesscss mode
