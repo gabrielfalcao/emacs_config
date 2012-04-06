@@ -103,10 +103,11 @@
 (load "~/.emacs.d/elisp/inspiration715644.el")
 (load "~/.emacs.d/elisp/inspiration733956.el")
 (load "~/.emacs.d/elisp/inspiration976777.el")
+(load "~/.emacs.d/elisp/color-theme-tomorrow.el")
 
 (setq color-theme-is-global t)
 
-(inspiration-733956)
+(color-theme-tomorrow-night)
 ;;(color-theme-tangotango)
 ;;(color-theme-blippblopp) ;; best light theme ! (default)
 ;;(color-theme-ld-dark) ;; pretty cool dark theme
