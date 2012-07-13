@@ -78,6 +78,7 @@
 (load-file "~/.emacs.d/elisp/auto-complete.el") ;;loading
 (require 'auto-complete);; preparing
 (global-auto-complete-mode t) ;;enabling
+(global-auto-revert-mode t)  ;; auto revert files that were changed
 (define-key ac-complete-mode-map "\C-n" 'ac-next)
 (define-key ac-complete-mode-map "\C-p" 'ac-previous)
 (setq ac-dwim t)
@@ -104,6 +105,11 @@
 (load "~/.emacs.d/elisp/inspiration733956.el")
 (load "~/.emacs.d/elisp/inspiration976777.el")
 (load "~/.emacs.d/elisp/color-theme-tomorrow.el")
+(load "~/.emacs.d/elisp/django-mode/django-mode.el")
+(load "~/.emacs.d/elisp/django-mode/django-html-mode.el")
+
+(require 'django-html-mode)
+(require 'django-mode)
 
 (setq color-theme-is-global t)
 
@@ -128,6 +134,7 @@
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/elisp/snippets")
+(yas/load-directory "~/.emacs.d/elisp/django-mode/snippets")
 
 ;; Exploring more goodies =)
 ;;(tool-bar-mode)
@@ -243,7 +250,7 @@
        (list
         '("\\.sgm$" . sgml-mode)
         '("\\.zpt$" . html-mode)
-        '("\\.html$" . html-mode)
+        '("\\.html$" . django-html-mode)
         '("\\.xml$" . xml-mode)
         '("\\.md$" . markdown-mode)
         '("\\.markdown$" . markdown-mode)
@@ -281,10 +288,10 @@
         '("\\.scss$" . less-css-mode)
         auto-mode-alist)))
 
-(global-set-key (kbd "<up>") 'ignore)
-(global-set-key (kbd "<down>") 'ignore)
-(global-set-key (kbd "<left>") 'ignore)
-(global-set-key (kbd "<right>") 'ignore)
+;; (global-set-key (kbd "<up>") 'ignore)
+;; (global-set-key (kbd "<down>") 'ignore)
+;; (global-set-key (kbd "<left>") 'ignore)
+;; (global-set-key (kbd "<right>") 'ignore)
 (require 'linum)
 (global-linum-mode)
 

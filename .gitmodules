@@ -1,0 +1,3 @@
+[submodule "emacs.d/elisp/django-mode"]
+	path = emacs.d/elisp/django-mode
+	url = https://github.com/myfreeweb/django-mode.git
