@@ -26,7 +26,7 @@
 
 (require 'flymake)
 
-(defcustom flymake-node-jshint-program "/Users/gabrielfalcao/.nvm/v0.6.10/bin/jshint"
+(defcustom flymake-node-jshint-program "/Users/gabrielfalcao/node_modules/.bin/jshint"
   "The JSHint program name."
   :type 'string
   :group 'flymake-node-jshint)

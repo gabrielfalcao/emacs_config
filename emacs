@@ -49,7 +49,7 @@
 ;(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
-(setenv "PATH" (concat "/Users/gabrielfalcao/.nvm/v0.6.10/bin:/usr/local/bin:/usr/local/git/bin:" (concat (getenv "HOME") "/usr/bin:") (getenv "PATH")))
+(setenv "PATH" (concat "/Users/gabrielfalcao/.nvm/v0.8.4/bin:/usr/local/bin:/usr/local/git/bin:" (concat (getenv "HOME") "/usr/bin:") (getenv "PATH")))
 
 (set-default-font "Monaco-16")
 ; Lesscss mode
@@ -235,7 +235,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(flymake-errline ((((class color)) (:background "#ff3131" :foreground "#101010"))))
+ '(flymake-errline ((((class color)) (:background "#f9ed9a" :foreground "#101010"))))
  '(rst-level-1-face ((t (:background "white" :foreground "black"))) t)
  '(rst-level-2-face ((t (:background "white" :foreground "black"))) t)
  '(rst-level-3-face ((t (:background "white" :foreground "black"))) t)
@@ -396,7 +396,7 @@
   (interactive)
   (shell-command "wmctrl -r :ACTIVE: -btoggle,fullscreen"))
 
-(global-set-key (kbd "<f11>") 'switch-full-screen)
+(global-set-key (kbd "M-RET") 'switch-full-screen)
 
 ;;try to fix strange stuff in css mode.
 
@@ -413,7 +413,7 @@
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
 (setq x-select-enable-clipboard t)
-(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+(setq interprogram-paste-function 'x-selection-value)
 
 (put 'downcase-region 'disabled nil)
 (autoload #'espresso-mode "espresso" "Start espresso-mode" t)
@@ -439,12 +439,9 @@
   (set-frame-size (selected-frame) 1000 1000))
 
 (global-set-key (kbd "<s-return>") 'maximize-frame)
-(global-set-key (kbd "M-RET") 'ns-toggle-fullscreen)
+;;(global-set-key (kbd "M-RET") 'ns-toggle-fullscreen)
 
 ;; (ns-toggle-fullscreen)
-(maximize-frame)
-(maximize-frame)
-(maximize-frame)
 
 (put 'upcase-region 'disabled nil)
 
@@ -498,3 +495,7 @@
 
 (fset 'vows2mocha
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([14 1 105 116 40 19 58 6 2 backspace 44 19 125 44 5 backspace 41 59] 0 "%d")) arg)))
+
+
+(tool-bar-mode 0)
+(setq mouse-wheel-progressive-speed nil)
