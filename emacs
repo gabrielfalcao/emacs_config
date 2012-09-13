@@ -6,9 +6,18 @@
 ;; where to get the latest emacs snapshot gtk
 ;; deb http://emacs.orebokech.com sid main
 ;; deb-src http://emacs.orebokech.com sid main
-(setq load-path (cons "~/.emacs.d/elisp/" load-path))
+(add-to-list 'load-path "~/.emacs.d/elisp/")
 (setq default-directory "~/projects/")
 (load "~/.emacs.d/elisp/flymake.el")
+;; Adding marmalade as a repo to the package module
+(require 'package)
+(add-to-list
+ 'package-archives
+ '("marmalade" .
+   "http://marmalade-repo.org/packages/")
+ '("melpa" .
+   "http://melpa.milkbox.net/packages/"))
+(package-initialize)
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
@@ -52,9 +61,11 @@
 (setenv "PATH" (concat "/Users/gabrielfalcao/.nvm/v0.8.4/bin:/usr/local/bin:/usr/local/git/bin:" (concat (getenv "HOME") "/usr/bin:") (getenv "PATH")))
 
 (set-default-font "Monaco-16")
+(set-frame-font "Monaco-16")
+
 ; Lesscss mode
 (load-file "~/.emacs.d/elisp/less-css-mode.el")
-
+(require 'esk)
 ; Python mode
 (load-file "~/.emacs.d/elisp/python.el")
 (load-file "~/.emacs.d/elisp/sunrise-commander.el")
@@ -68,7 +79,7 @@
 (require 'coffee-mode)
 (setq coffee-tab-width 2)
 
-(setenv "PYMACS_PYTHON" "python2.5")
+(setenv "PYMACS_PYTHON" "python2.6")
 (setq mac-option-key-is-meta t)
 (setq mac-command-key-is-meta t)
 (setq mac-command-modifier 'meta)
@@ -211,23 +222,6 @@
 (setq auto-mode-alist
      (cons '("\\.css\\'" . css-mode) auto-mode-alist))
 (setq cssm-indent-function #'cssm-c-style-indenter)
-
-;; Python stuff !
-
-(when (load "flymake" t)
-  (defun flymake-pyflakes-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "pyflakes" (list local-file))))
-  (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.py\\'" flymake-pyflakes-init)))
-
-;; (autoload 'py-complete-init "py-complete")
-;; ;(add-hook 'describe-mode-hook 'py-complete-init) pisses me off
-;; (add-hook 'describe-mode-hook 'flymake-mode)
 
 ;; better flymake colors
 (custom-set-faces
@@ -455,29 +449,6 @@
   "Display a warning to the user, using lwarn"
   (message warning))
 
-;; (defcustom flymake-allowed-file-name-masks
-;;   '(("\\.\\(?:c\\(?:pp\\|xx\\|\\+\\+\\)?\\|CC\\)\\'" flymake-simple-make-init)
-;;     ;("\\.xml\\'" flymake-xml-init)
-;;     ;("\\.html?\\'" flymake-xml-init)
-;;     ("\\.cs\\'" flymake-simple-make-init)
-;;     ("\\.p[ml]\\'" flymake-perl-init)
-;;     ("\\.php[345]?\\'" flymake-php-init)
-;;     ("\\.h\\'" flymake-master-make-header-init flymake-master-cleanup)
-;;     ("\\.java\\'" flymake-simple-make-java-init flymake-simple-java-cleanup)
-;;     ("[0-9]+\\.tex\\'" flymake-master-tex-init flymake-master-cleanup)
-;;     ("\\.tex\\'" flymake-simple-tex-init)
-;;     ("\\.idl\\'" flymake-simple-make-init)
-;;     ;; ("\\.cpp\\'" 1)
-;;     ;; ("\\.java\\'" 3)
-;;     ;; ("\\.h\\'" 2 ("\\.cpp\\'" "\\.c\\'")
-;;     ;; ("[ \t]*#[ \t]*include[ \t]*\"\\([\w0-9/\\_\.]*[/\\]*\\)\\(%s\\)\"" 1 2))
-;;     ;; ("\\.idl\\'" 1)
-;;     ;; ("\\.odl\\'" 1)
-;;     ;; ("[0-9]+\\.tex\\'" 2 ("\\.tex\\'")
-;;     ;; ("[ \t]*\\input[ \t]*{\\(.*\\)\\(%s\\)}" 1 2 ))
-;;     ;; ("\\.tex\\'" 1)
-;;     ))
-
 ;; to make it work install flake8: sudo pip install flake8
 
 (when (load "flymake" t)
@@ -496,6 +467,8 @@
 (fset 'vows2mocha
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([14 1 105 116 40 19 58 6 2 backspace 44 19 125 44 5 backspace 41 59] 0 "%d")) arg)))
 
-
+(require 'flymake-cursor)
 (tool-bar-mode 0)
 (setq mouse-wheel-progressive-speed nil)
+;(setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
+(server-mode)
