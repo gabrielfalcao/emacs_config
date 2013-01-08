@@ -271,8 +271,8 @@ are the string substitutions (see `format')."
 (defcustom flymake-allowed-file-name-masks
   '(("\\.c\\'" flymake-simple-make-init)
     ("\\.cpp\\'" flymake-simple-make-init)
-    ("\\.xml\\'" flymake-xml-init)
-    ("\\.html?\\'" flymake-xml-init)
+;;    ("\\.xml\\'" flymake-xml-init)
+;;    ("\\.html?\\'" flymake-xml-init)
     ("\\.cs\\'" flymake-simple-make-init)
     ("\\.p[ml]\\'" flymake-perl-init)
     ("\\.php[345]?\\'" flymake-php-init)
@@ -1737,9 +1737,9 @@ Use CREATE-TEMP-F for creating temp copy."
     (list "php" (list "-f" local-file "-l"))))
 
 ;;;; tex-specific init-cleanup routines
-(defun flymake-get-tex-args (file-name)
-  ;;(list "latex" (list "-c-style-errors" file-name))
-  (list "texify" (list "--pdf" "--tex-option=-c-style-errors" file-name)))
+;; (defun flymake-get-tex-args (file-name)
+;;   ;;(list "latex" (list "-c-style-errors" file-name))
+;;   (list "texify" (list "--pdf" "--tex-option=-c-style-errors" file-name)))
 
 (defun flymake-simple-tex-init ()
   (flymake-get-tex-args (flymake-init-create-temp-buffer-copy 'flymake-create-temp-inplace)))

@@ -1,6 +1,24 @@
+;; Overwrite flymake-display-warning so that no annoying dialog box is
+;; used.
+
+;; This version uses lwarn instead of message-box in the original version.
+;; lwarn will open another window, and display the warning in there.
 ;; where to get the latest emacs snapshot gtk
 ;; deb http://emacs.orebokech.com sid main
 ;; deb-src http://emacs.orebokech.com sid main
+(add-to-list 'load-path "~/.emacs.d/elisp/")
+(setq default-directory "~/projects/")
+(load "~/.emacs.d/elisp/flymake.el")
+
+;; Adding marmalade as a repo to the package module
+(require 'package)
+(add-to-list
+ 'package-archives
+ '("marmalade" .
+   "http://marmalade-repo.org/packages/")
+ '("melpa" .
+   "http://melpa.milkbox.net/packages/"))
+(package-initialize)
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
@@ -9,10 +27,10 @@
   ;; If there is more than one, they won't work right.
  '(browse-url-browser-function (quote browse-url-epiphany))
  '(column-number-mode t)
- '(face-font-family-alternatives (quote (("Monaco-10") ("helv" "helvetica" "arial" "fixed"))))
- '(inhibit-startup-echo-area-message "gabriel")
+ '(face-font-family-alternatives (quote (("Monaco-16") ("helv" "helvetica" "arial" "fixed"))))
+ '(inhibit-startup-echo-area-message "gabrielfalcao")
  '(initial-buffer-choice t)
- '(initial-scratch-message "")
+ '(initial-scratch-message "# Be welcome, my master:\n# I hope you're up for so much hacking.\n        - Your very editor, Emacs\n\n")
  '(menu-bar-mode nil)
  '(py-beep-if-tab-change nil)
  '(safe-local-variable-values (quote ((encoding . utf-8))))
@@ -22,6 +40,7 @@
  '(size-indication-mode t)
  '(tooltip-mode nil)
  '(transient-mark-mode t))
+ '(coffee-tab-width 2)
 ;;(custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -29,40 +48,64 @@
   ;; If there is more than one, they won't work right.
 ;;'(default ((t (:stipple nil :background "black" :foreground "#c0c0c0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :family "misc-fixed")))))
 
-(setq-default c-basic-offset 4)
+(setq-default c-basic-offset 2)
+(setq-default c++-basic-offset 2)
 (setq-default html-basic-offset 4)
 (setq tab-width 4) ; or any other preferred value
 
 (setq python-python-command "ipython")
 ;; Expanding the load-path
-(setq load-path (cons "~/.emacs.d/elisp/" load-path))
-(setq default-directory "~/")
+    (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
+    (require 'tex-site)
 ;(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
-(set-default-font "Monaco-10")
-; Python mode
-(load-file "~/.emacs.d/elisp/python-mode.el")
+(setenv "PATH" (concat "/Users/gabrielfalcao/.nvm/v0.8.4/bin:/usr/local/bin:/usr/local/git/bin:" (concat (getenv "HOME") "/usr/bin:") (getenv "PATH")))
 
-(setenv "PYMACS_PYTHON" "python2.5")
+(set-default-font "Monaco-16")
+(set-frame-font "Monaco-16")
+
+; Lesscss mode
+(load-file "~/.emacs.d/elisp/less-css-mode.el")
+(require 'esk)
+; Python mode
+(load-file "~/.emacs.d/elisp/python.el")
+(load-file "~/.emacs.d/elisp/sunrise-commander.el")
+; Php mode
+(load-file "~/.emacs.d/elisp/php-mode.el")
+; Feature mode  (lettuce)
+(load-file "~/.emacs.d/elisp/feature-mode.el")
+
+; Coffee-script mode
+(add-to-list 'load-path "~/.emacs.d/elisp/coffee-mode.el")
+(require 'coffee-mode)
+(setq coffee-tab-width 2)
+
+(setenv "PYMACS_PYTHON" "python2.6")
+(setq mac-option-key-is-meta t)
+(setq mac-command-key-is-meta t)
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'meta)
 
 ;; Auto completion inline
 (load-file "~/.emacs.d/elisp/auto-complete.el") ;;loading
 (require 'auto-complete);; preparing
 (global-auto-complete-mode t) ;;enabling
+(global-auto-revert-mode t)  ;; auto revert files that were changed
 (define-key ac-complete-mode-map "\C-n" 'ac-next)
 (define-key ac-complete-mode-map "\C-p" 'ac-previous)
 (setq ac-dwim t)
 
 (load-file "~/.emacs.d/elisp/two-mode-mode.el")
-(load-file "~/.emacs.d/elisp/django-html-mode.el")
 (load-file "~/.emacs.d/elisp/bar-cursor.el")
 (load-file "~/.emacs.d/elisp/maxframe.el")
 ;; making new emacs windows have a pretty font
 ;;(add-to-list 'default-frame-alist '(font . "Bitstream Vera SansMono-8"))
 
+(require 'python)
 ;; color theme
 (require 'color-theme)
+
 
 (load "~/.emacs.d/elisp/color-theme-twilight.el")
 (load "~/.emacs.d/elisp/color-theme-tango.el")
@@ -70,10 +113,21 @@
 (load "~/.emacs.d/elisp/color-theme-zenburn.el")
 (load "~/.emacs.d/elisp/color-theme-sunburst.el")
 (load "~/.emacs.d/elisp/color-theme-arjen.el")
+(load "~/.emacs.d/elisp/inspiration630889.el")
+(load "~/.emacs.d/elisp/inspiration715644.el")
+(load "~/.emacs.d/elisp/inspiration733956.el")
+(load "~/.emacs.d/elisp/inspiration976777.el")
+(load "~/.emacs.d/elisp/color-theme-tomorrow.el")
+(load "~/.emacs.d/elisp/django-mode/django-mode.el")
+(load "~/.emacs.d/elisp/django-mode/django-html-mode.el")
+
+(require 'django-html-mode)
+(require 'django-mode)
 
 (setq color-theme-is-global t)
 
-(color-theme-sunburst)
+(color-theme-tomorrow-night)
+;;(color-theme-tangotango)
 ;;(color-theme-blippblopp) ;; best light theme ! (default)
 ;;(color-theme-ld-dark) ;; pretty cool dark theme
 ;;(color-theme-hober) ;; good dark theme
@@ -93,6 +147,7 @@
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/elisp/snippets")
+(yas/load-directory "~/.emacs.d/elisp/django-mode/snippets")
 
 ;; Exploring more goodies =)
 ;;(tool-bar-mode)
@@ -147,40 +202,31 @@
       (delete-char 1)
       (move-to-column previous-column))))
 
+;; Turning regexp into the default search method
+
+;; (global-set-key [(ctrl c) (c)] 'comment-region)
+
+(global-set-key "\C-s" 'isearch-forward-regexp)
+
 ;; Now bind the delete line function to the F8 key
 (global-set-key [f8] 'nuke-line)
 ;;(global-hl-line-mode 1)
 
 ;; Yes, I'm a web developer =/
-(add-hook 'javascript-mode-hook 'js-mode)
 (add-hook 'before-make-frame-hook '(lambda()
-    (set-default-font "Monaco-10")
+    (set-default-font "Monaco-16")
 ))
+(add-hook 'message-mode-hook 'color-theme-tangotango)
+(add-hook 'gnus-article-mode-hook 'color-theme-tangotango)
+
 (autoload 'js-mode "js-mode" nil t)
 (autoload 'css-mode "css-mode" "Mode for editing CSS files" t)
 
-(setq auto-mode-alist
-     (cons '("\\.js\\'" . javscript-mode) auto-mode-alist))
+
+(load "~/.emacs.d/elisp/haml-mode.el")
 (setq auto-mode-alist
      (cons '("\\.css\\'" . css-mode) auto-mode-alist))
 (setq cssm-indent-function #'cssm-c-style-indenter)
-
-;; Python stuff !
-
-(when (load "flymake" t)
-  (defun flymake-pyflakes-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "pyflakes" (list local-file))))
-  (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.py\\'" flymake-pyflakes-init)))
-
-(autoload 'py-complete-init "py-complete")
-;(add-hook 'python-mode-hook 'py-complete-init) pisses me off
-(add-hook 'python-mode-hook 'flymake-mode)
 
 ;; better flymake colors
 (custom-set-faces
@@ -188,46 +234,106 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(flymake-errline ((((class color)) (:background "#ff3131" :foreground "#101010"))))
+ '(flymake-errline ((((class color)) (:background "#f9ed9a" :foreground "#101010"))))
  '(rst-level-1-face ((t (:background "white" :foreground "black"))) t)
  '(rst-level-2-face ((t (:background "white" :foreground "black"))) t)
  '(rst-level-3-face ((t (:background "white" :foreground "black"))) t)
  '(rst-level-4-face ((t (:background "grey64"))) t))
 
+(autoload 'markdown-mode "markdown-mode.el"
+   "Major mode for editing Markdown files" t)
+
+(require 'feature-mode)
 (setq auto-mode-alist
       (append
        (list
         '("\\.sgm$" . sgml-mode)
-        '("\\.zpt$" . django-html-mode)
+        '("\\.zpt$" . html-mode)
         '("\\.html$" . django-html-mode)
+        '("\\.xml$" . xml-mode)
+        '("\\.md$" . markdown-mode)
+        '("\\.markdown$" . markdown-mode)
         '(".emacs" . lisp-mode)
+        '("\\.coffee$" . coffee-mode)
+        '("\\.Cakefile$" . coffee-mode)
         '("emacs" . lisp-mode)
         '("\\.el$" . lisp-mode)
         '("Makefile.*" . makefile-mode)
-        '("\\.pt$" . django-html-mode)
-        '("\\.py$" . python-mode)
+        '("\\.pt$" . html-mode)
+        '("\\.[hc]$" . c-mode)
+        '("sagacity" . sh-mode)
+        '("\\.cpp$" . c++-mode)
+        '("\\.cc$" . c++-mode)
+        '("\\.hh$" . c++-mode)
+        '("\\.mm$" . objc-mode)
+        '("\\.sip$" . c++-mode)
+        '("\\.py$" . describe-mode)
         '("\\.migration$" . sql-mode)
         '("\\.sql$" . sql-mode)
         '("\\.rb$" . ruby-mode)
-        '("\\.feature$" . ruby-mode)
-        '("\\.tex$" . tex-mode)
+        '("Gemfile" . ruby-mode)
+        '("Rakefile" . ruby-mode)
+        '("\\.feature$" . feature-mode)
+        '("\\.ru$" . ruby-mode)
+        '("\\.tex$" . latex-mode)
+        '("\\.sh$" . shell-script-mode)
+        '(".*bash.*$" . shell-script-mode)
         '("\\.erl$" . erlang-mode)
         '("\\.php$" . php-mode)
-        '("\\.acc$" . python-mode)
+        '("\\.acc$" . describe-mode)
         '("\\.java$" . java-mode)
         '("\\.yml$" . yaml-mode)
         '("\\.yaml$" . yaml-mode)
+        '("\\.haml$" . haml-mode)
+        '("\\.jade$" . haml-mode)
         '("\\.rst$" . rst-mode)
         '("\\.css$" . css-mode)
+        '("\\.less$" . less-css-mode)
+        '("\\.sass$" . less-css-mode)
+        '("\\.scss$" . less-css-mode)
         auto-mode-alist)))
 
-(global-set-key (kbd "<up>") 'ignore)
-(global-set-key (kbd "<down>") 'ignore)
-(global-set-key (kbd "<left>") 'ignore)
-(global-set-key (kbd "<right>") 'ignore)
+;; (global-set-key (kbd "<up>") 'ignore)
+;; (global-set-key (kbd "<down>") 'ignore)
+;; (global-set-key (kbd "<left>") 'ignore)
+;; (global-set-key (kbd "<right>") 'ignore)
 (require 'linum)
 (global-linum-mode)
 
+
+
+(eval-after-load "dired-aux"
+   '(add-to-list 'dired-compress-file-suffixes
+                 '("\\.zip\\'" ".zip" "unzip")))
+(eval-after-load "dired"
+  '(define-key dired-mode-map "z" 'dired-zip-files))
+(defun dired-zip-files (zip-file)
+  "Create an archive containing the marked files."
+  (interactive "sEnter name of zip file: ")
+
+  ;; create the zip file
+  (let ((zip-file (if (string-match ".zip$" zip-file) zip-file (concat zip-file ".zip"))))
+    (shell-command
+     (concat "zip "
+             zip-file
+             " "
+             (concat-string-list
+              (mapcar
+               '(lambda (filename)
+                  (file-name-nondirectory filename))
+               (dired-get-marked-files))))))
+
+  (revert-buffer)
+
+  ;; remove the mark on all the files  "*" to " "
+  ;; (dired-change-marks 42 ?\040)
+  ;; mark zip file
+  ;; (dired-mark-files-regexp (filename-to-regexp zip-file))
+  )
+
+(defun concat-string-list (list)
+   "Return a string which is a concatenation of all elements of the list separated by spaces"
+    (mapconcat '(lambda (obj) (format "%s" obj)) list " "))
 ;; Copyright (C) 2007 by Tapsell-Ferrier Limited
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -258,7 +364,7 @@
 
 ;; electric bindings for help mode
 (require 'ehelp)
-(font-lock-add-keywords 'python-mode
+(font-lock-add-keywords 'describe-mode
  '(("\\<\\(FIXME\\|HACK\\|XXX\\|TODO\\):?" 1 font-lock-warning-face prepend)))
 
  (font-lock-add-keywords 'c-mode
@@ -267,7 +373,16 @@
   (font-lock-add-keywords 'latex-mode
    '(("\\<\\(FIXME\\|HACK\\|XXX\\|TODO\\):?" 1 font-lock-warning-face prepend)))
 
-(global-set-key (kbd "M-#") 'uncomment-region)
+(defun make-all ()
+  (interactive)
+  (shell-command "make all"))
+
+(defun make-build ()
+  (interactive)
+  (shell-command "make build"))
+
+(global-set-key (kbd "C-c u") 'uncomment-region)
+(global-set-key (kbd "C-c c") 'comment-region)
 (global-set-key (kbd "C-#") 'comment-region)
 (global-set-key (kbd "M-SPC") 'hippie-expand)
 (global-set-key (kbd "<f9>") 'highlight-beyond-fill-column)
@@ -279,15 +394,15 @@
 (global-set-key (kbd "C-.") 'increase-left-margin)
 (global-set-key (kbd "C-,") 'decrease-left-margin)
 ;; compile/make
-(global-set-key (kbd "<f5>")   'recompile)
-(global-set-key (kbd "S-<f5>") 'compile)
+(global-set-key (kbd "<f5>")   'make-all)
+(global-set-key (kbd "S-<f5>") 'make-build)
 
 ;; fullscreen editing
 (defun switch-full-screen ()
   (interactive)
   (shell-command "wmctrl -r :ACTIVE: -btoggle,fullscreen"))
 
-(global-set-key (kbd "<f11>") 'switch-full-screen)
+(global-set-key (kbd "M-RET") 'switch-full-screen)
 
 ;;try to fix strange stuff in css mode.
 
@@ -295,39 +410,115 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'html-mode-hook
           (lambda()
-            (setq sgml-basic-offset 4)
+            (setq sgml-basic-offset 2)
             (setq indent-tabs-mode t)))
 
-(setq html-indent-level 4)
-(setq cssm-indent-level 4)
+(setq html-indent-level 2)
+(setq cssm-indent-level 2)
 (setq cssm-newline-before-closing-bracket t)
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
 (setq x-select-enable-clipboard t)
-(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+(setq interprogram-paste-function 'x-selection-value)
 
 (put 'downcase-region 'disabled nil)
-(autoload 'javascript-mode "javascript" nil t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
+(autoload #'espresso-mode "espresso" "Start espresso-mode" t)
+(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
+(add-to-list 'auto-mode-alist '("Jakefile$" . espresso-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
 ;; (autoload 'pymacs-load "pymacs" nil t)
 ;; (autoload 'pymacs-eval "pymacs" nil t)
 ;; (autoload 'pymacs-apply "pymacs")
 ;; (autoload 'pymacs-call "pymacs")
 
+(require 'flymake-node-jshint)
+;;(setq flymake-node-jshint-config "~/.jshintrc-node.json") ; optional
+(add-hook 'js-mode-hook (lambda () (flymake-mode 1)))
+
 (load-library "init_python")
 
-(set-default-font "Monaco-10")
+(set-default-font "Monaco-16")
 
-(defvar my-fullscreen-p t "Check if fullscreen is on or off")
-
-(defun my-toggle-fullscreen ()
+(defun maximize-frame ()
   (interactive)
-  (setq my-fullscreen-p (not my-fullscreen-p))
-  (if my-fullscreen-p
-	  (restore-frame)
-	(maximize-frame)))
+  (set-frame-position (selected-frame) 0 0)
+  (set-frame-size (selected-frame) 1000 1000))
 
-(global-set-key (kbd "M-RET") 'my-toggle-fullscreen)
-(my-toggle-fullscreen)
-(tool-bar-mode)
-(server-start)
+(global-set-key (kbd "<s-return>") 'maximize-frame)
+;;(global-set-key (kbd "M-RET") 'ns-toggle-fullscreen)
+
+;; (ns-toggle-fullscreen)
+
+(put 'upcase-region 'disabled nil)
+
+;; (defun flymake-display-warning (warning)
+;;   "Display a warning to the user, using lwarn"
+;;   (lwarn 'flymake :warning warning))
+
+;; Using lwarn might be kind of annoying on its own, popping up windows and
+;; what not. If you prefer to recieve the warnings in the mini-buffer, use:
+;; (defun flymake-display-warning (warning)
+;;   "Display a warning to the user, using lwarn"
+;;   (message warning))
+
+;; to make it work install flake8: sudo pip install flake8
+
+(when (load "flymake" t)
+  (defun flymake-pyflakes-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+               'flymake-create-temp-inplace))
+       (local-file (file-relative-name
+            temp-file
+            (file-name-directory buffer-file-name))))
+      (list "/usr/local/bin/flake8" (list "--ignore=E501,E128" local-file))))
+   (add-to-list 'flymake-allowed-file-name-masks
+             '("\\.py\\'" flymake-pyflakes-init)))
+
+
+(setq initial-major-mode 'python-mode)
+
+(defun kill-all-buffers ()
+  (interactive)
+  (mapcar '(lambda (b) (kill-buffer b)) (buffer-list)))
+
+(fset 'vows2mocha
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([14 1 105 116 40 19 58 6 2 backspace 44 19 125 44 5 backspace 41 59] 0 "%d")) arg)))
+
+(require 'flymake-cursor)
+(tool-bar-mode 0)
+(setq mouse-wheel-progressive-speed nil)
+;(setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
+
+
+;; Copyright (C) 2012  Lincoln de Sousa <lincoln@comum.org>
+;;
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+(defun kill-all-buffers-mercilessly ()
+  "*DANGEROUS* function that kills all the buffers mercilessly
+
+I suggest you to DO NOT bind it to any keyboard shortcut and
+please, be careful, once called, it can't be stopped!"
+  (interactive)
+  (mapcar '(lambda (b)
+             (ignore-errors
+               (revert-buffer 1 1))
+             (kill-buffer b))
+          (buffer-list)))
+
+
+(setq flymake-gui-warnings-enabled nil)
+;; (load "~/.emacs.d/elisp/smartparens.el")
+;; (smartparens-global-mode 1)
+(server-mode)
