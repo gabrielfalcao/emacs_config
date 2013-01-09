@@ -9,6 +9,7 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 (setq default-directory "~/projects/")
 (load "~/.emacs.d/elisp/flymake.el")
+
 ;; Adding marmalade as a repo to the package module
 (require 'package)
 (add-to-list
@@ -47,7 +48,8 @@
   ;; If there is more than one, they won't work right.
 ;;'(default ((t (:stipple nil :background "black" :foreground "#c0c0c0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :family "misc-fixed")))))
 
-(setq-default c-basic-offset 4)
+(setq-default c-basic-offset 2)
+(setq-default c++-basic-offset 2)
 (setq-default html-basic-offset 4)
 (setq tab-width 4) ; or any other preferred value
 
@@ -201,6 +203,9 @@
       (move-to-column previous-column))))
 
 ;; Turning regexp into the default search method
+
+;; (global-set-key [(ctrl c) (c)] 'comment-region)
+
 (global-set-key "\C-s" 'isearch-forward-regexp)
 
 ;; Now bind the delete line function to the F8 key
@@ -256,6 +261,12 @@
         '("Makefile.*" . makefile-mode)
         '("\\.pt$" . html-mode)
         '("\\.[hc]$" . c-mode)
+        '("sagacity" . sh-mode)
+        '("\\.cpp$" . c++-mode)
+        '("\\.cc$" . c++-mode)
+        '("\\.hh$" . c++-mode)
+        '("\\.mm$" . objc-mode)
+        '("\\.sip$" . c++-mode)
         '("\\.py$" . describe-mode)
         '("\\.migration$" . sql-mode)
         '("\\.sql$" . sql-mode)
@@ -370,7 +381,8 @@
   (interactive)
   (shell-command "make build"))
 
-(global-set-key (kbd "M-#") 'uncomment-region)
+(global-set-key (kbd "C-c u") 'uncomment-region)
+(global-set-key (kbd "C-c c") 'comment-region)
 (global-set-key (kbd "C-#") 'comment-region)
 (global-set-key (kbd "M-SPC") 'hippie-expand)
 (global-set-key (kbd "<f9>") 'highlight-beyond-fill-column)
@@ -439,15 +451,15 @@
 
 (put 'upcase-region 'disabled nil)
 
-(defun flymake-display-warning (warning)
-  "Display a warning to the user, using lwarn"
-  (lwarn 'flymake :warning warning))
+;; (defun flymake-display-warning (warning)
+;;   "Display a warning to the user, using lwarn"
+;;   (lwarn 'flymake :warning warning))
 
 ;; Using lwarn might be kind of annoying on its own, popping up windows and
 ;; what not. If you prefer to recieve the warnings in the mini-buffer, use:
-(defun flymake-display-warning (warning)
-  "Display a warning to the user, using lwarn"
-  (message warning))
+;; (defun flymake-display-warning (warning)
+;;   "Display a warning to the user, using lwarn"
+;;   (message warning))
 
 ;; to make it work install flake8: sudo pip install flake8
 
@@ -458,11 +470,16 @@
        (local-file (file-relative-name
             temp-file
             (file-name-directory buffer-file-name))))
-      (list "/usr/local/bin/flake8"  (list local-file))))
+      (list "/usr/local/bin/flake8" (list "--ignore=E501,E128" local-file))))
    (add-to-list 'flymake-allowed-file-name-masks
              '("\\.py\\'" flymake-pyflakes-init)))
 
+
 (setq initial-major-mode 'python-mode)
+
+(defun kill-all-buffers ()
+  (interactive)
+  (mapcar '(lambda (b) (kill-buffer b)) (buffer-list)))
 
 (fset 'vows2mocha
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([14 1 105 116 40 19 58 6 2 backspace 44 19 125 44 5 backspace 41 59] 0 "%d")) arg)))
@@ -471,4 +488,37 @@
 (tool-bar-mode 0)
 (setq mouse-wheel-progressive-speed nil)
 ;(setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
+
+
+;; Copyright (C) 2012  Lincoln de Sousa <lincoln@comum.org>
+;;
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+(defun kill-all-buffers-mercilessly ()
+  "*DANGEROUS* function that kills all the buffers mercilessly
+
+I suggest you to DO NOT bind it to any keyboard shortcut and
+please, be careful, once called, it can't be stopped!"
+  (interactive)
+  (mapcar '(lambda (b)
+             (ignore-errors
+               (revert-buffer 1 1))
+             (kill-buffer b))
+          (buffer-list)))
+
+
+(setq flymake-gui-warnings-enabled nil)
+;; (load "~/.emacs.d/elisp/smartparens.el")
+;; (smartparens-global-mode 1)
 (server-mode)
