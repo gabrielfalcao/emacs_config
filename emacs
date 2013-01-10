@@ -234,7 +234,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(flymake-errline ((((class color)) (:background "#f9ed9a" :foreground "#101010"))))
+ '(flymake-errline ((((class color)) (:background "#D1F9FF" :foreground "#333"))))
  '(rst-level-1-face ((t (:background "white" :foreground "black"))) t)
  '(rst-level-2-face ((t (:background "white" :foreground "black"))) t)
  '(rst-level-3-face ((t (:background "white" :foreground "black"))) t)
@@ -470,7 +470,8 @@
        (local-file (file-relative-name
             temp-file
             (file-name-directory buffer-file-name))))
-      (list "/usr/local/bin/flake8" (list "--ignore=E501,E128" local-file))))
+      ;; (list "/usr/local/bin/flake8" (list "--ignore=E501,E128" local-file))))
+      (list "/usr/local/bin/flake8" (list "" local-file))))
    (add-to-list 'flymake-allowed-file-name-masks
              '("\\.py\\'" flymake-pyflakes-init)))
 
