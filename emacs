@@ -121,14 +121,8 @@
 
 
 (setq color-theme-is-global t)
-
 (color-theme-tomorrow-night)
-;;(color-theme-tangotango)
-;;(color-theme-blippblopp) ;; best light theme ! (default)
-;;(color-theme-ld-dark) ;; pretty cool dark theme
-;;(color-theme-hober) ;; good dark theme
-;;(color-theme-andreas) ;; almost good light theme
-(setq color-theme-is-global nil)
+;; (setq color-theme-is-global nil)
 (setq-default indent-tabs-mode nil)
 
 ;; cucumber.el -- Emacs mode for editing plain text user stories
@@ -241,6 +235,11 @@
 
 (require 'feature-mode)
 (require 'web-mode)
+(set-face-attribute 'web-mode-doctype-face nil :foreground (face-foreground font-lock-function-name-face))
+(set-face-attribute 'web-mode-html-tag-face nil :foreground (face-foreground font-lock-function-name-face))
+(set-face-attribute 'web-mode-html-attr-name-face nil :foreground (face-foreground font-lock-variable-name-face))
+(set-face-attribute 'web-mode-html-attr-value-face nil :foreground (face-foreground font-lock-type-face))
+
 (setq auto-mode-alist
       (append
        (list
