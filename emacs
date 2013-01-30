@@ -56,7 +56,7 @@
 (setq python-python-command "ipython")
 ;; Expanding the load-path
     (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
-    (require 'tex-site)
+;;    (require 'tex-site)
 ;(set-default-font "Monospace-9")
 ;(set-fontset-font (frame-parameter nil 'font)
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
@@ -118,11 +118,7 @@
 (load "~/.emacs.d/elisp/inspiration733956.el")
 (load "~/.emacs.d/elisp/inspiration976777.el")
 (load "~/.emacs.d/elisp/color-theme-tomorrow.el")
-(load "~/.emacs.d/elisp/django-mode/django-mode.el")
-(load "~/.emacs.d/elisp/django-mode/django-html-mode.el")
 
-(require 'django-html-mode)
-(require 'django-mode)
 
 (setq color-theme-is-global t)
 
@@ -147,7 +143,6 @@
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/elisp/snippets")
-(yas/load-directory "~/.emacs.d/elisp/django-mode/snippets")
 
 ;; Exploring more goodies =)
 ;;(tool-bar-mode)
@@ -208,6 +203,7 @@
 
 (global-set-key "\C-s" 'isearch-forward-regexp)
 
+
 ;; Now bind the delete line function to the F8 key
 (global-set-key [f8] 'nuke-line)
 ;;(global-hl-line-mode 1)
@@ -244,12 +240,20 @@
    "Major mode for editing Markdown files" t)
 
 (require 'feature-mode)
+(require 'web-mode)
 (setq auto-mode-alist
       (append
        (list
         '("\\.sgm$" . sgml-mode)
         '("\\.zpt$" . html-mode)
-        '("\\.html$" . django-html-mode)
+        '("\\.html$" . web-mode)
+        '("\\.phtml\\'" . web-mode)
+        '("\\.tpl\\.php\\'" . web-mode)
+        '("\\.jsp\\'" . web-mode)
+        '("\\.as[cp]x\\'" . web-mode)
+        '("\\.erb\\'" . web-mode)
+        '("\\.mustache\\'" . web-mode)
+        '("\\.djhtml\\'" . web-mode)
         '("\\.xml$" . xml-mode)
         '("\\.md$" . markdown-mode)
         '("\\.markdown$" . markdown-mode)
@@ -272,10 +276,12 @@
         '("\\.sql$" . sql-mode)
         '("\\.rb$" . ruby-mode)
         '("Gemfile" . ruby-mode)
+        '("Vagrantfile" . ruby-mode)
+        '("Berksfile" . ruby-mode)
         '("Rakefile" . ruby-mode)
         '("\\.feature$" . feature-mode)
         '("\\.ru$" . ruby-mode)
-        '("\\.tex$" . latex-mode)
+;;        '("\\.tex$" . latex-mode)
         '("\\.sh$" . shell-script-mode)
         '(".*bash.*$" . shell-script-mode)
         '("\\.erl$" . erlang-mode)
@@ -370,8 +376,8 @@
  (font-lock-add-keywords 'c-mode
   '(("\\<\\(FIXME\\|HACK\\|XXX\\|TODO\\):?" 1 font-lock-warning-face prepend)))
 
-  (font-lock-add-keywords 'latex-mode
-   '(("\\<\\(FIXME\\|HACK\\|XXX\\|TODO\\):?" 1 font-lock-warning-face prepend)))
+;;  (font-lock-add-keywords 'latex-mode
+;;   '(("\\<\\(FIXME\\|HACK\\|XXX\\|TODO\\):?" 1 font-lock-warning-face prepend)))
 
 (defun make-all ()
   (interactive)
@@ -381,6 +387,7 @@
   (interactive)
   (shell-command "make build"))
 
+(global-set-key (kbd "C-O") 'next-multiframe-window)
 (global-set-key (kbd "C-c u") 'uncomment-region)
 (global-set-key (kbd "C-c c") 'comment-region)
 (global-set-key (kbd "C-#") 'comment-region)
@@ -470,8 +477,8 @@
        (local-file (file-relative-name
             temp-file
             (file-name-directory buffer-file-name))))
-      ;; (list "/usr/local/bin/flake8" (list "--ignore=E501,E128" local-file))))
-      (list "/usr/local/bin/flake8" (list "" local-file))))
+       (list "/usr/local/bin/flake8" (list "--ignore=E501,E128" local-file))))
+      ;;(list "/usr/local/bin/flake8" (list "" local-file))))
    (add-to-list 'flymake-allowed-file-name-masks
              '("\\.py\\'" flymake-pyflakes-init)))
 
@@ -522,4 +529,7 @@ please, be careful, once called, it can't be stopped!"
 (setq flymake-gui-warnings-enabled nil)
 ;; (load "~/.emacs.d/elisp/smartparens.el")
 ;; (smartparens-global-mode 1)
+
+(require 'find-file-in-repository)
+(global-set-key (kbd "C-x f") 'find-file-in-repository)
 (server-mode)
