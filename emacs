@@ -71,6 +71,8 @@
 ; Python mode
 (load-file "~/.emacs.d/elisp/python.el")
 (load-file "~/.emacs.d/elisp/sunrise-commander.el")
+;; (add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'python-mode-hook 'jedi:ac-setup)
 ; Php mode
 (load-file "~/.emacs.d/elisp/php-mode.el")
 ; Feature mode  (lettuce)
@@ -528,6 +530,13 @@ please, be careful, once called, it can't be stopped!"
 (setq flymake-gui-warnings-enabled nil)
 ;; (load "~/.emacs.d/elisp/smartparens.el")
 ;; (smartparens-global-mode 1)
+
+;; Auto complete
+(require 'auto-complete)
+(global-auto-complete-mode t)
+(setq ac-dwim 2)
+(define-key ac-complete-mode-map "\C-n" 'ac-next)
+(define-key ac-complete-mode-map "\C-p" 'ac-previous)
 
 (require 'find-file-in-repository)
 (global-set-key (kbd "C-x f") 'find-file-in-repository)
