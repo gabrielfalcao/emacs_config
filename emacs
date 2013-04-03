@@ -237,6 +237,10 @@
 
 (require 'feature-mode)
 (require 'web-mode)
+(require 'zencoding-mode)
+(add-hook 'web-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
+(global-set-key (kbd "<backtab>") 'zencoding-expand-line)
+
 (set-face-attribute 'web-mode-doctype-face nil :foreground (face-foreground font-lock-function-name-face))
 (set-face-attribute 'web-mode-html-tag-face nil :foreground (face-foreground font-lock-function-name-face))
 (set-face-attribute 'web-mode-html-attr-name-face nil :foreground (face-foreground font-lock-variable-name-face))
