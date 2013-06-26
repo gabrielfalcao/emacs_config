@@ -1,0 +1,7 @@
+# -*- coding: utf-8 -*-
+# name: script
+# contributor: Gabriel Falcão <gabriel@nacaolivre.org>
+# --
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
