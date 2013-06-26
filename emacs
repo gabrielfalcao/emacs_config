@@ -1,3 +1,4 @@
+
 ;; Overwrite flymake-display-warning so that no annoying dialog box is
 ;; used.
 
@@ -197,6 +198,8 @@
 
 ;; (global-set-key [(ctrl c) (c)] 'comment-region)
 
+(global-set-key [(ctrl x) (r) (w)] 'kill-rectangle)
+(global-set-key [(ctrl x) (r) (y)] 'yank-rectangle)
 (global-set-key "\C-s" 'isearch-forward-regexp)
 
 
@@ -222,10 +225,10 @@
 
 ;; better flymake colors
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(flymake-errline ((((class color)) (:background "#D1F9FF" :foreground "#333"))))
  '(rst-level-1-face ((t (:background "white" :foreground "black"))) t)
  '(rst-level-2-face ((t (:background "white" :foreground "black"))) t)
@@ -251,6 +254,8 @@
        (list
         '("\\.sgm$" . sgml-mode)
         '("\\.zpt$" . html-mode)
+        '("\\.m$" . objc-mode)
+        '("\\.mm$" . objc-mode)
         '("\\.html$" . web-mode)
         '("\\.phtml\\'" . web-mode)
         '("\\.tpl\\.php\\'" . web-mode)
@@ -303,6 +308,38 @@
         '("\\.sass$" . less-css-mode)
         '("\\.scss$" . less-css-mode)
         auto-mode-alist)))
+
+
+;; <Objective-C>
+
+;; (add-to-list 'magic-mode-alist
+;;                 `(,(lambda ()
+;;                      (and (string= (file-name-extension buffer-file-name) "h")
+;;                           (re-search-forward "@\\<interface\\>"
+;; 					     magic-mode-regexp-match-limit t)))
+;;                   . objc-mode))
+
+(require 'find-file) ;; for the "cc-other-file-alist" variable
+(nconc (cadr (assoc "\\.h\\'" cc-other-file-alist)) '(".m" ".mm"))
+
+(defadvice ff-get-file-name (around ff-get-file-name-framework
+				    (search-dirs
+				     fname-stub
+				     &optional suffix-list))
+  "Search for Mac framework headers as well as POSIX headers."
+   (or
+    (if (string-match "\\(.*?\\)/\\(.*\\)" fname-stub)
+	(let* ((framework (match-string 1 fname-stub))
+	       (header (match-string 2 fname-stub))
+	       (fname-stub (concat framework ".framework/Headers/" header)))
+	  ad-do-it))
+      ad-do-it))
+(ad-enable-advice 'ff-get-file-name 'around 'ff-get-file-name-framework)
+(ad-activate 'ff-get-file-name)
+(setq cc-search-directories '("." "../include" "/usr/include" "/usr/local/include/*"
+			      "/System/Library/Frameworks" "/Library/Frameworks"))
+
+;; </Objective-C>
 
 ;; (global-set-key (kbd "<up>") 'ignore)
 ;; (global-set-key (kbd "<down>") 'ignore)
@@ -391,6 +428,24 @@
 (defun make-build ()
   (interactive)
   (shell-command "make build"))
+(defun make-test ()
+  (interactive)
+  (shell-command "make test"))
+(defun make-unit ()
+  (interactive)
+  (shell-command "make unit"))
+(defun make-functional ()
+  (interactive)
+  (shell-command "make functional"))
+(defun make-release ()
+  (interactive)
+  (shell-command "make release"))
+(defun make-docs ()
+  (interactive)
+  (shell-command "make docs"))
+(defun make-integration ()
+  (interactive)
+  (shell-command "make integration"))
 
 (global-set-key (kbd "C-O") 'next-multiframe-window)
 (global-set-key (kbd "C-c u") 'uncomment-region)
@@ -404,6 +459,7 @@
 (global-set-key (kbd "C-<") 'decrease-left-margin)
 
 (global-set-key (kbd "C-.") 'increase-left-margin)
+(global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-,") 'decrease-left-margin)
 ;; compile/make
 (global-set-key (kbd "<f5>")   'make-all)
@@ -438,10 +494,6 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
 (add-to-list 'auto-mode-alist '("Jakefile$" . espresso-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
-;; (autoload 'pymacs-load "pymacs" nil t)
-;; (autoload 'pymacs-eval "pymacs" nil t)
-;; (autoload 'pymacs-apply "pymacs")
-;; (autoload 'pymacs-call "pymacs")
 
 (require 'flymake-node-jshint)
 ;;(setq flymake-node-jshint-config "~/.jshintrc-node.json") ; optional
@@ -517,6 +569,12 @@
 ;;
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+(defun beautify-json ()
+  (interactive)
+    (let ((b (if mark-active (min (point) (mark)) (point-min)))
+            (e (if mark-active (max (point) (mark)) (point-max))))
+                (shell-command-on-region b e
+                     "python -mjson.tool" (current-buffer) t)))
 
 (defun kill-all-buffers-mercilessly ()
   "*DANGEROUS* function that kills all the buffers mercilessly
@@ -530,7 +588,23 @@ please, be careful, once called, it can't be stopped!"
              (kill-buffer b))
           (buffer-list)))
 
+(defun clear-blank-lines ()
+  (interactive)
+  (goto-char 1)
+  (flush-lines "^\t*$" nil t)
+  (flush-lines "^[ ]*$" nil t))
 
+
+(when (eq system-type 'darwin)
+ ;; default Latin font (e.g. Consolas)
+ (set-face-attribute 'default nil :family "Monaco")
+ ;; default font size (point * 10)
+ ;;
+ ;; WARNING!  Depending on the default font,
+ ;; if the size is not supported very well, the frame will be clipped
+ ;; so that the beginning of the buffer may not be visible correctly. 
+ (set-face-attribute 'default nil :height 165)
+ )
 (setq flymake-gui-warnings-enabled nil)
 ;; (load "~/.emacs.d/elisp/smartparens.el")
 ;; (smartparens-global-mode 1)
