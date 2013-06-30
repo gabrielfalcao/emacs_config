@@ -296,6 +296,7 @@
         '(".*bash.*$" . shell-script-mode)
         '("\\.erl$" . erlang-mode)
         '("\\.php$" . php-mode)
+        '("\\.go$" . go-mode)
         '("\\.acc$" . describe-mode)
         '("\\.java$" . java-mode)
         '("\\.yml$" . yaml-mode)
@@ -602,12 +603,25 @@ please, be careful, once called, it can't be stopped!"
  ;;
  ;; WARNING!  Depending on the default font,
  ;; if the size is not supported very well, the frame will be clipped
- ;; so that the beginning of the buffer may not be visible correctly. 
+ ;; so that the beginning of the buffer may not be visible correctly.
  (set-face-attribute 'default nil :height 165)
  )
 (setq flymake-gui-warnings-enabled nil)
 ;; (load "~/.emacs.d/elisp/smartparens.el")
 ;; (smartparens-global-mode 1)
+
+;; transparency
+(defun set-frame-alpha (arg &optional active)
+  (interactive "nEnter alpha value (1-100): \np")
+  (let* ((elt (assoc 'alpha default-frame-alist))
+         (old (frame-parameter nil 'alpha))
+         (new (cond ((atom old)     `(,arg ,arg))
+                    ((eql 1 active) `(,arg ,(cadr old)))
+                    (t              `(,(car old) ,arg)))))
+    (if elt (setcdr elt new) (push `(alpha ,@new) default-frame-alist))
+    (set-frame-parameter nil 'alpha new)))
+(global-set-key (kbd "C-c t") 'set-frame-alpha)
+(set-frame-alpha 97)
 
 ;; Auto complete
 (require 'auto-complete)
