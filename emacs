@@ -1,5 +1,4 @@
 
-;; Overwrite flymake-display-warning so that no annoying dialog box is
 ;; used.
 
 ;; This version uses lwarn instead of message-box in the original version.
@@ -8,8 +7,8 @@
 ;; deb http://emacs.orebokech.com sid main
 ;; deb-src http://emacs.orebokech.com sid main
 (add-to-list 'load-path "~/.emacs.d/elisp/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (setq default-directory "~/projects/")
-(load "~/.emacs.d/elisp/flymake.el")
 
 ;; Adding marmalade as a repo to the package module
 (require 'package)
@@ -21,17 +20,26 @@
    "http://melpa.milkbox.net/packages/"))
 (package-initialize)
 
+(setenv "GOPATH" "~/projects/go-packages")
+(setenv "PATH" (concat (getenv "PATH") ":" "~/projects/go-packages/bin"))
+;;(setq exec-path (append exec-path (list (expand-file-name "~/projects/go-packages/bin"))))
+
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(browse-url-browser-function (quote browse-url-epiphany))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(circe-default-nick "falcaogabriel")
  '(column-number-mode t)
- '(face-font-family-alternatives (quote (("Monaco-16") ("helv" "helvetica" "arial" "fixed"))))
+ '(custom-safe-themes (quote ("dc46381844ec8fcf9607a319aa6b442244d8c7a734a2625dac6a1f63e34bc4a6" "978bd4603630ecb1f01793af60beb52cb44734fc14b95c62e7b1a05f89b6c811" "6f3060ac8300275c990116794e1ba897b6a8af97c51a0cb226a98759752cddcf" "c7359bd375132044fe993562dfa736ae79efc620f68bab36bd686430c980df1c" "d293542c9d4be8a9e9ec8afd6938c7304ac3d0d39110344908706614ed5861c9" "d0ff5ea54497471567ed15eb7279c37aef3465713fb97a50d46d95fe11ab4739" "3341f6db5ac17e4174f7488c40676e7f0464f1e88519a59303dc7e7774245bbf" default)))
  '(inhibit-startup-echo-area-message "gabrielfalcao")
  '(initial-buffer-choice t)
- '(initial-scratch-message "# Be welcome, my master:\n# I hope you're up for so much hacking.\n        - Your very editor, Emacs\n\n")
+ '(initial-scratch-message "# Be welcome, my master:
+# I hope you're up for so much hacking.
+        - Your very editor, Emacs
+
+")
+ '(jabber-account-list (quote ("gabrielfalcao@jabber-br.org")))
  '(menu-bar-mode nil)
  '(py-beep-if-tab-change nil)
  '(safe-local-variable-values (quote ((encoding . utf-8))))
@@ -50,6 +58,7 @@
 ;;'(default ((t (:stipple nil :background "black" :foreground "#c0c0c0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :family "misc-fixed")))))
 
 (setq-default c-basic-offset 2)
+;(setq-default vc-follow-symlinks t)
 (setq-default c++-basic-offset 2)
 (setq-default html-basic-offset 4)
 (setq tab-width 4) ; or any other preferred value
@@ -63,8 +72,8 @@
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
 (setenv "PATH" (concat "/Users/gabrielfalcao/.nvm/v0.8.4/bin:/usr/local/bin:/usr/local/git/bin:" (concat (getenv "HOME") "/usr/bin:") (getenv "PATH")))
 
-(set-default-font "Monaco-16")
-(set-frame-font "Monaco-16")
+(set-default-font "Monaco-15")
+(set-frame-font "Monaco-15")
 
 ; Lesscss mode
 (load-file "~/.emacs.d/elisp/less-css-mode.el")
@@ -111,6 +120,7 @@
 
 
 (load "~/.emacs.d/elisp/color-theme-twilight.el")
+(load "~/.emacs.d/elisp/color-theme-twilight.el")
 (load "~/.emacs.d/elisp/color-theme-tango.el")
 (load "~/.emacs.d/elisp/color-theme-blackboard.el")
 (load "~/.emacs.d/elisp/color-theme-zenburn.el")
@@ -124,10 +134,10 @@
 
 
 (setq color-theme-is-global t)
-(color-theme-tomorrow-night)
+;;(color-theme-tomorrow-night)
 ;; (setq color-theme-is-global nil)
 (setq-default indent-tabs-mode nil)
-
+(load-theme 'spolsky t)
 ;; cucumber.el -- Emacs mode for editing plain text user stories
 ;; \C-c ,v - Verify all scenarios in the current buffer file.
 ;; \C-c ,s - Verify the scenario under the point in the current buffer.
@@ -207,10 +217,6 @@
 (global-set-key [f8] 'nuke-line)
 ;;(global-hl-line-mode 1)
 
-;; Yes, I'm a web developer =/
-(add-hook 'before-make-frame-hook '(lambda()
-    (set-default-font "Monaco-16")
-))
 (add-hook 'message-mode-hook 'color-theme-tangotango)
 (add-hook 'gnus-article-mode-hook 'color-theme-tangotango)
 
@@ -223,13 +229,11 @@
      (cons '("\\.css\\'" . css-mode) auto-mode-alist))
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
-;; better flymake colors
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(flymake-errline ((((class color)) (:background "#D1F9FF" :foreground "#333"))))
  '(rst-level-1-face ((t (:background "white" :foreground "black"))) t)
  '(rst-level-2-face ((t (:background "white" :foreground "black"))) t)
  '(rst-level-3-face ((t (:background "white" :foreground "black"))) t)
@@ -257,6 +261,7 @@
         '("\\.m$" . objc-mode)
         '("\\.mm$" . objc-mode)
         '("\\.html$" . web-mode)
+        '("\\.svg$" . web-mode)
         '("\\.phtml\\'" . web-mode)
         '("\\.tpl\\.php\\'" . web-mode)
         '("\\.jsp\\'" . web-mode)
@@ -341,7 +346,6 @@
 			      "/System/Library/Frameworks" "/Library/Frameworks"))
 
 ;; </Objective-C>
-
 ;; (global-set-key (kbd "<up>") 'ignore)
 ;; (global-set-key (kbd "<down>") 'ignore)
 ;; (global-set-key (kbd "<left>") 'ignore)
@@ -496,13 +500,9 @@
 (add-to-list 'auto-mode-alist '("Jakefile$" . espresso-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
 
-(require 'flymake-node-jshint)
-;;(setq flymake-node-jshint-config "~/.jshintrc-node.json") ; optional
-(add-hook 'js-mode-hook (lambda () (flymake-mode 1)))
-
 (load-library "init_python")
 
-(set-default-font "Monaco-16")
+
 
 (defun maximize-frame ()
   (interactive)
@@ -516,45 +516,24 @@
 
 (put 'upcase-region 'disabled nil)
 
-;; (defun flymake-display-warning (warning)
-;;   "Display a warning to the user, using lwarn"
-;;   (lwarn 'flymake :warning warning))
-
-;; Using lwarn might be kind of annoying on its own, popping up windows and
-;; what not. If you prefer to recieve the warnings in the mini-buffer, use:
-;; (defun flymake-display-warning (warning)
-;;   "Display a warning to the user, using lwarn"
-;;   (message warning))
-
-;; to make it work install flake8: sudo pip install flake8
-
-(when (load "flymake" t)
-  (defun flymake-pyflakes-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-               'flymake-create-temp-inplace))
-       (local-file (file-relative-name
-            temp-file
-            (file-name-directory buffer-file-name))))
-       (list "/usr/local/bin/flake8" (list "--ignore=E501,E128" local-file))))
-      ;;(list "/usr/local/bin/flake8" (list "" local-file))))
-   (add-to-list 'flymake-allowed-file-name-masks
-             '("\\.py\\'" flymake-pyflakes-init)))
-
-
 (setq initial-major-mode 'python-mode)
 
-(defun kill-all-buffers ()
-  (interactive)
-  (mapcar '(lambda (b) (kill-buffer b)) (buffer-list)))
 
-(fset 'vows2mocha
-   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([14 1 105 116 40 19 58 6 2 backspace 44 19 125 44 5 backspace 41 59] 0 "%d")) arg)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(flymake-errline ((((class color)) (:background "#D1F9FF" :foreground "#333")))))
 
+(setq flymake-python-pyflakes-executable "/usr/local/bin/flake8")
+(setq flymake-python-pyflakes-extra-arguments '("--ignore=E801"))
 (require 'flymake-cursor)
+(add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
+
 (tool-bar-mode 0)
 (setq mouse-wheel-progressive-speed nil)
 ;(setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
-
 
 ;; Copyright (C) 2012  Lincoln de Sousa <lincoln@comum.org>
 ;;
@@ -595,6 +574,18 @@ please, be careful, once called, it can't be stopped!"
   (flush-lines "^\t*$" nil t)
   (flush-lines "^[ ]*$" nil t))
 
+(load-file "~/.private.el")
+
+(setq circe-network-options
+      `(("Freenode"
+         :nick "falcaogabriel"
+         :channels ("#yipit" "#guake", "#python", "#python-dev", "#github")
+         :nickserv-password ,freenode-password
+         )))
+(defun irc ()
+  "Connect to IRC"
+  (interactive)
+  (circe "Freenode"))
 
 (when (eq system-type 'darwin)
  ;; default Latin font (e.g. Consolas)
@@ -604,11 +595,25 @@ please, be careful, once called, it can't be stopped!"
  ;; WARNING!  Depending on the default font,
  ;; if the size is not supported very well, the frame will be clipped
  ;; so that the beginning of the buffer may not be visible correctly.
- (set-face-attribute 'default nil :height 165)
+ (set-face-attribute 'default nil :height 150)
  )
 (setq flymake-gui-warnings-enabled nil)
 ;; (load "~/.emacs.d/elisp/smartparens.el")
 ;; (smartparens-global-mode 1)
+
+;; Changing the frame title to show my host name and full path of file open on
+;; the current buffer
+(setq frame-title-format
+      (list (format "%s %%S: %%j " (system-name))
+        '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
+
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse)
+
+;; go flymake
+;; (add-to-list 'load-path "~/projects/go-packages/src/github.com/dougm/goflymake")
+;; (require 'go-flymake)
+;; (require 'go-flycheck)
 
 ;; transparency
 (defun set-frame-alpha (arg &optional active)
@@ -632,4 +637,5 @@ please, be careful, once called, it can't be stopped!"
 
 (require 'find-file-in-repository)
 (global-set-key (kbd "C-x f") 'find-file-in-repository)
+(server-force-delete)
 (server-mode)

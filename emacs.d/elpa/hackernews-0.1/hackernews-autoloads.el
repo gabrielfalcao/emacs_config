@@ -3,9 +3,20 @@
 ;;; Code:
 
 
-;;;### (autoloads (hackernews) "hackernews" "hackernews.el" (20762
-;;;;;;  49220))
+;;;### (autoloads (hackernews) "../../../Dropbox/projects/personal/emacs_config/emacs.d/elpa/hackernews-0.1/hackernews"
+;;;;;;  "hackernews.el" "8ffdc5cc684f97033747ca72439c3743")
 ;;; Generated autoloads from hackernews.el
+
+(autoload 'hackernews "../../../Dropbox/projects/personal/emacs_config/emacs.d/elpa/hackernews-0.1/hackernews" "\
+The entry point of our client
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (hackernews) "hackernews" "../../../../../../../.emacs.d/elpa/hackernews-0.1/hackernews.el"
+;;;;;;  "8ffdc5cc684f97033747ca72439c3743")
+;;; Generated autoloads from ../../../../../../../.emacs.d/elpa/hackernews-0.1/hackernews.el
 
 (autoload 'hackernews "hackernews" "\
 The entry point of our client
@@ -14,7 +25,10 @@ The entry point of our client
 
 ;;;***
 
-;;;### (autoloads nil nil ("hackernews-pkg.el") (20762 49220 181615))
+;;;### (autoloads nil nil ("../../../../../../../.emacs.d/elpa/hackernews-0.1/hackernews-autoloads.el"
+;;;;;;  "../../../../../../../.emacs.d/elpa/hackernews-0.1/hackernews-pkg.el"
+;;;;;;  "../../../../../../../.emacs.d/elpa/hackernews-0.1/hackernews.el"
+;;;;;;  "hackernews.el") (21034 3147 120590))
 
 ;;;***
 
