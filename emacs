@@ -57,6 +57,10 @@
   ;; If there is more than one, they won't work right.
 ;;'(default ((t (:stipple nil :background "black" :foreground "#c0c0c0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :family "misc-fixed")))))
 
+(custom-set-faces
+ '(flymake-errline ((((class color)) (:background "#FF80F4" :foreground "#333")))))
+ '(flymake-warnline ((((class color)) (:background "#FF80F4" :foreground "#333")))))
+
 (setq-default c-basic-offset 2)
 ;(setq-default vc-follow-symlinks t)
 (setq-default c++-basic-offset 2)
