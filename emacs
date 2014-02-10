@@ -57,10 +57,6 @@
   ;; If there is more than one, they won't work right.
 ;;'(default ((t (:stipple nil :background "black" :foreground "#c0c0c0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :family "misc-fixed")))))
 
-(custom-set-faces
- '(flymake-errline ((((class color)) (:background "#FF80F4" :foreground "#333"))))
- '(flymake-warnline ((((class color)) (:background "#FF80F4" :foreground "#333")))))
-
 (setq-default c-basic-offset 2)
 ;(setq-default vc-follow-symlinks t)
 (setq-default c++-basic-offset 2)
@@ -80,7 +76,6 @@
 (set-frame-font "Monaco-15")
 
 ; Lesscss mode
-(load-file "~/.emacs.d/elisp/less-css-mode.el")
 (require 'esk)
 ; Python mode
 (load-file "~/.emacs.d/elisp/python.el")
@@ -265,6 +260,8 @@
         '("\\.m$" . objc-mode)
         '("\\.mm$" . objc-mode)
         '("\\.html$" . web-mode)
+        '("\\.tpl$" . web-mode)
+        '("\\.template$" . web-mode)
         '("\\.svg$" . web-mode)
         '("\\.phtml\\'" . web-mode)
         '("\\.tpl\\.php\\'" . web-mode)
@@ -314,6 +311,7 @@
         '("\\.jade$" . haml-mode)
         '("\\.rst$" . rst-mode)
         '("\\.css$" . css-mode)
+        '("\\.sls$" . yaml-mode)
         '("\\.less$" . less-css-mode)
         '("\\.sass$" . less-css-mode)
         '("\\.scss$" . less-css-mode)
