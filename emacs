@@ -72,8 +72,8 @@
 ;                    'han '("cwTeXHeiBold" . "unicode-bmp"))
 (setenv "PATH" (concat "/Users/gabrielfalcao/.nvm/v0.8.4/bin:/usr/local/bin:/usr/local/git/bin:" (concat (getenv "HOME") "/usr/bin:") (getenv "PATH")))
 
-(set-default-font "Monaco-15")
-(set-frame-font "Monaco-15")
+(set-default-font "Monaco-16")
+(set-frame-font "Monaco-16")
 
 ; Lesscss mode
 (require 'esk)
@@ -529,7 +529,7 @@
  '(flymake-errline ((((class color)) (:background "#D1F9FF" :foreground "#333")))))
 
 (setq flymake-python-pyflakes-executable "/usr/local/bin/flake8")
-(setq flymake-python-pyflakes-extra-arguments '("--ignore=E801"))
+(setq flymake-python-pyflakes-extra-arguments '("--ignore=E801,E501,E711"))
 (require 'flymake-cursor)
 (add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
 
