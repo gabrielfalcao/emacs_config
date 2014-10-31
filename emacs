@@ -637,6 +637,8 @@ please, be careful, once called, it can't be stopped!"
 (define-key ac-complete-mode-map "\C-n" 'ac-next)
 (define-key ac-complete-mode-map "\C-p" 'ac-previous)
 
+(add-hook 'prog-mode-hook 'vi-tilde-fringe-mode)
+
 (require 'find-file-in-repository)
 (global-set-key (kbd "C-x f") 'find-file-in-repository)
 (server-force-delete)
