@@ -1,0 +1,12 @@
+#name : import ipdb;ipdb.set_trace()
+# --
+import sys
+old_out = sys.stdout
+old_err = sys.stderr
+sys.stdout = sys.__stdout__
+sys.stderr = sys.__stderr__
+try:
+    import ipdb; ipdb.set_trace()
+finally:
+    sys.stdout = old_out
+    sys.stderr = old_err

@@ -1,0 +1,20 @@
+# -*- coding: utf-8 -*-
+# name: threaded
+# contributor: Gabriel Falcão <gabriel@nacaolivre.org>
+# --
+from threading import Thread
+
+def threaded(function):
+    """Decorator that makes given function/method be threaded
+       By Gabriel Falcão <gabriel@nacaolivre.org>
+       Licensed under MIT-license
+    """
+    def wrapper(*args, **kw):
+        t = Thread(target=function, args=args, kwargs=kw)
+        t.setDaemon(True)
+        t.start()
+
+    wrapper.__name__ = function.__name__
+    wrapper.__dict__ = function.__dict__
+    wrapper.__doc__ = function.__doc__
+    return wrapper

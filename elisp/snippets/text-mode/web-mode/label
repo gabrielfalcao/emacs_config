@@ -1,0 +1,7 @@
+#contributor : Gabriel Falcão <gabriel@nacaolivre.org>
+#name : <label for="..." class="...">...</label>
+#group : form
+# --
+<label for="$1" class="$2">$3
+  <input type="text" name="$1" id="$1" />
+</label>

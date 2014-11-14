@@ -78,6 +78,7 @@
 ; Lesscss mode
 (require 'esk)
 ; Python mode
+(load-file "~/.emacs.d/elisp/nyan-mode.el")
 (load-file "~/.emacs.d/elisp/python.el")
 (load-file "~/.emacs.d/elisp/sunrise-commander.el")
 ;; (add-hook 'python-mode-hook 'jedi:setup)

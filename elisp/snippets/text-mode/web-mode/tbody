@@ -1,0 +1,5 @@
+#contributor : Gabriel Falcão <gabriel@nacaolivre.org>
+#name : <tbody>...</tbody>
+#group : table
+# --
+<tbody>$1</tbody>
