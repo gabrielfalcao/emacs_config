@@ -4,5 +4,7 @@
 # --
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# Copyright © 2013 Propellr LLC
+# Author: Gabriel
 #
 from __future__ import unicode_literals

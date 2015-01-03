@@ -9,6 +9,8 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (setq default-directory "~/projects/")
+(require 'flymake)
+(require 'flymake-python-pyflakes)
 
 ;; Adding marmalade as a repo to the package module
 (require 'package)
@@ -529,6 +531,9 @@
  ;; If there is more than one, they won't work right.
  '(flymake-errline ((((class color)) (:background "#D1F9FF" :foreground "#333")))))
 
+(setq flymake-run-in-place nil)
+(setq temporary-file-directory "~/.emacs.d/tmp/")
+
 (setq flymake-python-pyflakes-executable "/usr/local/bin/flake8")
 (setq flymake-python-pyflakes-extra-arguments '("--ignore=E801,E501,E711"))
 (require 'flymake-cursor)
@@ -577,18 +582,18 @@ please, be careful, once called, it can't be stopped!"
   (flush-lines "^\t*$" nil t)
   (flush-lines "^[ ]*$" nil t))
 
-(load-file "~/.private.el")
+;; (load-file "~/.private.el")
 
-(setq circe-network-options
-      `(("Freenode"
-         :nick "falcaogabriel"
-         :channels ("#yipit" "#guake", "#python", "#python-dev", "#github")
-         :nickserv-password ,freenode-password
-         )))
-(defun irc ()
-  "Connect to IRC"
-  (interactive)
-  (circe "Freenode"))
+;; (setq circe-network-options
+;;       `(("Freenode"
+;;          :nick "falcaogabriel"
+;;          :channels ("#yipit" "#guake", "#python", "#python-dev", "#github")
+;;          :nickserv-password ,freenode-password
+;;          )))
+;; (defun irc ()
+;;   "Connect to IRC"
+;;   (interactive)
+;;   (circe "Freenode"))
 
 (when (eq system-type 'darwin)
  ;; default Latin font (e.g. Consolas)
