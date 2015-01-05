@@ -11,6 +11,7 @@
 (setq default-directory "~/projects/")
 (require 'flymake)
 (require 'flymake-python-pyflakes)
+(require 'yaml-mode)
 
 ;; Adding marmalade as a repo to the package module
 (require 'package)
@@ -531,8 +532,8 @@
  ;; If there is more than one, they won't work right.
  '(flymake-errline ((((class color)) (:background "#D1F9FF" :foreground "#333")))))
 
-(setq flymake-run-in-place nil)
-(setq temporary-file-directory "~/.emacs.d/tmp/")
+;; (setq flymake-run-in-place nil)
+;; (setq temporary-file-directory "~/.emacs.d/tmp/")
 
 (setq flymake-python-pyflakes-executable "/usr/local/bin/flake8")
 (setq flymake-python-pyflakes-extra-arguments '("--ignore=E801,E501,E711"))
